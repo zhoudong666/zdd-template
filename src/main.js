@@ -17,6 +17,11 @@ import '@/icons' // icon
 import '@/router/permission' // permission control
 import './utils/directives.js'
 
+// 自定义组件 全局注册
+import CustomDialog from '@/components/CustomDialog'
+
+Vue.component('CustomDialog', CustomDialog)
+
 /**
  * If you don't want to use mock-server
  * you want to use MockJs for mock api

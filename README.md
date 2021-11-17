@@ -1,4 +1,4 @@
-# print-project
+# zdd-template
 
 ## Project setup
 ```

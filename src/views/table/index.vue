@@ -1,7 +1,6 @@
 <template>
   <div class="app-container">
     <el-button @click="dialogVisible = true">1412312</el-button>
-    <el-button @click="dialogVisible2 = true">1412312</el-button>
     <el-dialog
       v-dialogDrag
       title="提示"
@@ -18,25 +17,6 @@
       </span>
     </el-dialog>
 
-    <el-dialog
-      v-dialogDragWidth
-      title="提示"
-      :visible.sync="dialogVisible2"
-      :before-close="handleClose"
-      :modal="false"
-      modal-append-to-body
-      append-to-body
-      :close-on-click-modal="true"
-      width="200px"
-    >
-      <span>这是一段信息1234477777774</span>
-      <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogVisible2 = false">取 消</el-button>
-        <el-button type="primary" @click="dialogVisible2 = false"
-          >确 定</el-button
-        >
-      </span>
-    </el-dialog>
     <el-table
       v-loading="listLoading"
       :data="list"
@@ -110,8 +90,7 @@ export default {
     return {
       list: null,
       listLoading: true,
-      dialogVisible: false,
-      dialogVisible2: false
+      dialogVisible: false
     }
   },
   created() {

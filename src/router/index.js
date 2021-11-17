@@ -107,6 +107,12 @@ export const constantRoutes = [
         meta: { title: 'Table', icon: 'table' }
       },
       {
+        path: 'dialogDrag',
+        name: 'dialogDrag',
+        component: () => import('@/views/example/dialogDrag/index'),
+        meta: { title: 'dialogDrag', icon: 'table' }
+      },
+      {
         path: 'my-table',
         name: 'MyTable',
         component: () => import('@/views/my-table/index'),
