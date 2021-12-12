@@ -123,6 +123,12 @@ export const constantRoutes = [
         name: 'Tree',
         component: () => import('@/views/tree/index'),
         meta: { title: 'Tree', icon: 'tree' }
+      },
+      {
+        path: 'ZDialog',
+        name: 'ZDialog',
+        component: () => import('@/views/example/ZDialog/index'),
+        meta: { title: 'ZDialog', icon: 'tree' }
       }
     ]
   },
@@ -132,10 +138,10 @@ export const constantRoutes = [
     component: Layout,
     children: [
       {
-        path: 'index',
-        name: 'Form',
+        path: 'myTable',
+        name: 'myTable',
         component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form' }
+        meta: { title: 'myTable', icon: 'form' }
       }
     ]
   },
@@ -202,7 +208,8 @@ export const constantRoutes = [
   },
 
   {
-    path: 'external-link',
+    // path: 'external-link',
+    path: '',
     component: Layout,
     children: [
       {
@@ -233,11 +240,12 @@ export const constantRoutes = [
 // 这段代码的意思就是告诉服务器，前边请求啥你都去找index.html, 其他你都不要干涉、
 // 不加这段的话，当代码部署的时候就会发现你的路由失效了。不能刷新等等情况。
 
-const createRouter = () => new Router({
-  // mode: 'history', // require service support
-  scrollBehavior: () => ({ y: 0 }),
-  routes: constantRoutes
-})
+const createRouter = () =>
+  new Router({
+    // mode: 'history', // require service support
+    scrollBehavior: () => ({ y: 0 }),
+    routes: constantRoutes
+  })
 
 const router = createRouter()
 // Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465

@@ -1,5 +1,5 @@
 module.exports = {
-  title: 'zdd-admin',
+  title: 'zdd-template',
 
   /**
    * @type {boolean} true | false

@@ -29,7 +29,7 @@ export default {
   },
   data() {
     return {
-      title: 'Print Manage System',
+      title: 'ZDD Template System',
       logo: require('@/assets/logo.png') // '~@/assets/logo.png'
     }
   }
