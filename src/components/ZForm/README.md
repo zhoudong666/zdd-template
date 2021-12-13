@@ -21,3 +21,36 @@
 | span         | 所占份数                                    | Number                    | 24        |
 | options      | 当表单元素为 select、raido、checkbox 时使用 | []{ label: '', value:''}  | []        |
 | props        | 用来接受 element 原始表单所有属性           | Object                    |           |
+
+### input 简单案例
+
+```js
+ // 1 默认输入类型为input
+        {
+          // type:'input',// 默认类型
+          label: '用户名用户名',
+          key: 'name',
+          // isRequired: true,
+          isShow: function (form) {
+            console.log(form)
+            return true
+          },
+          rule: [
+            {
+              validator: (rule, value, callback) => {
+                if (value === '') callback(new Error('请输入XXX'))
+              },
+              trigger: 'blur'
+            },
+            {
+              validator: (rule, value, callback) => {
+                if (value === '111222') callback(new Error('值不可为111222'))
+              },
+              trigger: 'change'
+            }
+          ],
+          span: 12,
+          defaultValue: 'defaultValue',
+          props: { placeholder: '8888' /* disabled: true */ }
+        }
+```

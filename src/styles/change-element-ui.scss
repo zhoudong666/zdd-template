@@ -1,0 +1,35 @@
+.el-card__header {
+  padding: 12px 20px;
+}
+.el-card__body {
+  padding: 10px;
+}
+.el-date-editor.el-input,
+.el-date-editor.el-input__inner {
+  width: 100%;
+}
+
+/* 一定要是全局的样式 */
+.el-scrollbar__wrap {
+  overflow-x: hidden !important;
+}
+.el-scrollbar {
+  height: 100%;
+}
+
+.el-scrollbar__bar.is-vertical {
+  width: 6px;
+}
+.el-cascader {
+  width: 100%;
+}
+.el-picker-panel__content {
+  margin-bottom: 0 !important;
+}
+/*select*/
+.el-select-dropdown__wrap {
+  margin-bottom: unset !important;
+}
+.el-select {
+  width: 100%;
+}

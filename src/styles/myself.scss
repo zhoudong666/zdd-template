@@ -1,0 +1,67 @@
+.flex {
+  display: flex;
+}
+.pointer {
+  cursor: pointer;
+}
+.float-left {
+  float: left;
+}
+.float-right {
+  float: right;
+}
+
+.red-btn {
+  color: #f56c6c;
+}
+.red-btn:focus,
+.red-btn:hover {
+  color: #f12e2e;
+}
+.blue-btn {
+  color: #409eff;
+}
+
+.blue-btn:focus,
+.blue-btn:hover {
+  color: #66b1ff;
+}
+
+@for $i from 1 through 20 {
+  $base: 1;
+  $fontsize: $base * $i;
+  // 设置字号
+  .fs-#{$fontsize} {
+    font-size: $fontsize + 0px;
+  }
+  .padding-#{$fontsize} {
+    padding: $fontsize + 0px;
+  }
+  .padding-top-#{$fontsize} {
+    padding-top: $fontsize + 0px;
+  }
+  .padding-bottom-#{$fontsize} {
+    padding-bottom: $fontsize + 0px;
+  }
+  .padding-right-#{$fontsize} {
+    padding-right: $fontsize + 0px;
+  }
+  .padding-left-#{$fontsize} {
+    padding-left: $fontsize + 0px;
+  }
+  .margin-#{$fontsize} {
+    margin: $fontsize + 0px;
+  }
+  .margin-top-#{$fontsize} {
+    margin-top: $fontsize + 0px;
+  }
+  .margin-bottom-#{$fontsize} {
+    margin-bottom: $fontsize + 0px;
+  }
+  .margin-right-#{$fontsize} {
+    margin-right: $fontsize + 0px;
+  }
+  .margin-left-#{$fontsize} {
+    margin-left: $fontsize + 0px;
+  }
+}

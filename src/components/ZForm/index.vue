@@ -1,5 +1,5 @@
 <template>
-  <el-form class="pro-form" :ref="formRef" :model="form" v-bind="$attrs">
+  <el-form class="pro-form" :ref="formRef" :model="form" v-bind="$attrs" :label-width="labelWidth">
     <el-row :gutter="16">
       <el-col v-for="item in formItems" :key="item.key" :span="item.span || 24">
         <el-form-item v-if="item._isShow" :rules="item._rule" :prop="item.key" :label="item.label">
@@ -7,21 +7,21 @@
         </el-form-item>
       </el-col>
       <span v-show="innerIsOpen || isOpen">
-        <el-col v-for="item in toggleFormItems" :key="item.key" :span="item.span || 12">
+        <el-col v-for="item in toggleFormItems" :key="item.key" :span="item.span || 24">
           <el-form-item v-if="item._isShow" :rules="item._rule" :prop="item.key" :label="item.label">
             <component :is="item.type" v-model.trim="form[item.key]" :options="item.options" v-bind="item.props" />
           </el-form-item>
         </el-col>
       </span>
       <slot name="search" />
+      <el-col :span="controlSpan" v-if="hasControl">
+        <el-button type="primary" @click="submit">{{ submitText }}</el-button>
+        <el-button @click="reset">{{ resetText }}</el-button>
+        <el-button v-if="toggleFormItems.length" @click="openOrClose">
+          {{ isOpen || innerIsOpen ? '收起' : '展开' }}
+        </el-button>
+      </el-col>
     </el-row>
-    <el-form-item v-if="hasControl">
-      <el-button type="primary" @click="submit">{{ submitText }}</el-button>
-      <el-button @click="reset">{{ resetText }}</el-button>
-      <el-button v-if="toggleFormItems.length" @click="openOrClose">
-        {{ isOpen || innerIsOpen ? '收起' : '展开' }}
-      </el-button>
-    </el-form-item>
   </el-form>
 </template>
 
@@ -42,6 +42,11 @@ export default {
       // required: true,
       default: 'form'
     },
+    /** label 的宽度 */
+    labelWidth: {
+      type: String,
+      default: '100px'
+    },
     /** 有折叠项情况下 是否展开 */
     isOpen: {
       type: Boolean,
@@ -61,6 +66,11 @@ export default {
     hasControl: {
       type: Boolean,
       default: true
+    },
+    /** 控制按钮所占份数 */
+    controlSpan: {
+      type: Number,
+      default: 8
     },
     /** 提交按钮文本 */
     submitText: {

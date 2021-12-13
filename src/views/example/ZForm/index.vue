@@ -1,7 +1,10 @@
 <template>
-  <div>
-    <div>123</div>
-    <z-form :fields="fields1" :toggleFields="toggleFields" label-width="160px" @submit="onSubmit" ref="aaa"> </z-form>
+  <div class="padding-15">
+    <el-card>
+      <div slot="header">form title</div>
+      <z-form :fields="fields1" :toggleFields="toggleFields" label-position="right" @submit="onSubmit" ref="aaa">
+      </z-form>
+    </el-card>
   </div>
 </template>
 
@@ -15,7 +18,7 @@ export default {
         // 1 默认输入类型为input
         {
           // type:'input',// 默认类型
-          label: '用户名',
+          label: '用户名用户名',
           key: 'name',
           // isRequired: true,
           isShow: function (form) {
@@ -47,7 +50,8 @@ export default {
         {
           // type:'input',// 默认类型
           label: '用户名222',
-          key: 'name22'
+          key: 'name22',
+          span: 12
         }
       ]
     }
