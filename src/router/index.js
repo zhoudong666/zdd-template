@@ -101,6 +101,12 @@ export const constantRoutes = [
     meta: { title: 'Example', icon: 'el-icon-s-help' },
     children: [
       {
+        path: 'ZForm',
+        name: 'ZForm',
+        component: () => import('@/views/example/ZForm/index'),
+        meta: { title: 'ZForm', icon: 'tree' }
+      },
+      {
         path: 'table',
         name: 'Table',
         component: () => import('@/views/table/index'),
@@ -176,15 +182,13 @@ export const constantRoutes = [
             children: [
               {
                 path: 'menu1-2-1',
-                component: () =>
-                  import('@/views/nested/menu1/menu1-2/menu1-2-1'),
+                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
                 name: 'Menu1-2-1',
                 meta: { title: 'Menu1-2-1' }
               },
               {
                 path: 'menu1-2-2',
-                component: () =>
-                  import('@/views/nested/menu1/menu1-2/menu1-2-2'),
+                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'),
                 name: 'Menu1-2-2',
                 meta: { title: 'Menu1-2-2' }
               }
