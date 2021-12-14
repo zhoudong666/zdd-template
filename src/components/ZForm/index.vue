@@ -3,7 +3,13 @@
     <el-row :gutter="16">
       <el-col v-for="item in formItems" :key="item.key" :span="item.span || 24">
         <el-form-item v-if="item._isShow" :rules="item._rule" :prop="item.key" :label="item.label">
-          <component :is="item.type" v-model.trim="form[item.key]" :options="item.options" v-bind="item.props" />
+          <component
+            :is="item.type"
+            v-model.trim="form[item.key]"
+            :options="item.options"
+            v-bind="item.props"
+            v-on="item.events"
+          />
         </el-form-item>
       </el-col>
       <span v-show="innerIsOpen || isOpen">
@@ -31,7 +37,7 @@
 // import BaRadio from "../base-components/ba-radio";
 // import BaSelectInput from "../base-components/ba-select-input";
 import { computeFormItem } from './core'
-
+import elMap from './element-map'
 export default {
   name: 'ZForm',
   // components: { BaCheckbox, BaSelect, BaRadio, BaSelectInput },
@@ -45,7 +51,7 @@ export default {
     /** label 的宽度 */
     labelWidth: {
       type: String,
-      default: '100px'
+      default: '110px'
     },
     /** 有折叠项情况下 是否展开 */
     isOpen: {
@@ -108,20 +114,29 @@ export default {
     /** 初始化表单对象 返回初始值对象给data里的form */
     initForm() {
       // console.log('data 执行阶段 : computed 还没有执行', this.formItems)
-      const tempFormObj = {}
-      const map = {
-        input: '',
-        inputNumber: 0,
-        selectInput: []
-        // datetime: new Date(),
-        // undefined: ''
+      const tempFormObj = {} // 临时存放表单数据的对象
+      const defaultValMap = {} // 表单项默认值map
+      for (const key in elMap) {
+        if (Object.hasOwnProperty.call(elMap, key)) {
+          defaultValMap[key] = elMap[key].defaultVal
+        }
       }
+      // const defaultValMap = elMap.map((item) => {})
+      // const defaultValMap = {
+      //   input: '',
+      //   checkbox: false,
+      //   checkboxGroup: [],
+      //   inputNumber: 0,
+      //   selectInput: []
+      //   // datetime: new Date(),
+      //   // undefined: ''
+      // }
       this.fields.concat(this.toggleFields).forEach((item) => {
         if (item.defaultValue !== undefined) {
           tempFormObj[item.key] = item.defaultValue
         } else {
           // TODO 每种表单类型元素不一样，所以默认值也有所不同
-          tempFormObj[item.key] = map[item.type || 'input']
+          tempFormObj[item.key] = defaultValMap[item.type || 'input']
         }
       })
       return tempFormObj

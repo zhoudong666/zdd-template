@@ -27,6 +27,7 @@ export function computeFormItem(config, form) {
   // 计算组件真实对应的名称并传入一些默认配置
   const res = ElementMap[item.type || 'input']
   item.type = res.component
+  // debugger
   item.props = Object.assign({}, res.props, item.props)
 
   // 处理联动
@@ -43,6 +44,6 @@ export function computeFormItem(config, form) {
     const temp = typeof item.contentWidth === 'number' ? `${item.contentWidth}px` : item.contentWidth
     item.props.style = { width: temp }
   }
-  console.log(item)
+  // console.log(item)
   return item
 }

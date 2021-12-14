@@ -101,10 +101,10 @@ export const constantRoutes = [
     meta: { title: 'Example', icon: 'el-icon-s-help' },
     children: [
       {
-        path: 'ZForm',
-        name: 'ZForm',
-        component: () => import('@/views/example/ZForm/index'),
-        meta: { title: 'ZForm', icon: 'tree' }
+        path: 'ZFormDemo',
+        name: 'ZFormDemo',
+        component: () => import('@/views/example/ZFormDemo/index'),
+        meta: { title: 'ZFormDemo', icon: 'tree' }
       },
       {
         path: 'table',
@@ -148,6 +148,28 @@ export const constantRoutes = [
         name: 'myTable',
         component: () => import('@/views/form/index'),
         meta: { title: 'myTable', icon: 'form' }
+      }
+    ]
+  },
+
+  {
+    path: '/css',
+    component: Layout,
+    redirect: '/css/demo1',
+    name: 'CSS',
+    meta: { title: 'CSS', icon: 'el-icon-s-help' },
+    children: [
+      {
+        path: 'demo1',
+        name: 'demo1',
+        component: () => import('@/views/css-demo/demo1-colorful-border'),
+        meta: { title: 'demo1', icon: 'form' }
+      },
+      {
+        path: 'demo2',
+        name: 'demo2',
+        component: () => import('@/views/css-demo/demo2'),
+        meta: { title: 'demo2', icon: 'form' }
       }
     ]
   },
@@ -225,8 +247,18 @@ export const constantRoutes = [
 
   {
     path: '/404',
-    component: () => import('@/views/404'),
-    hidden: true
+    component: Layout,
+    hidden: true,
+    // component: () => import('@/views/404'),
+    redirect: '/404/404',
+    children: [
+      {
+        path: '404',
+        name: '404',
+        component: () => import('@/views/404'),
+        meta: { title: '404', icon: 'form' }
+      }
+    ]
   },
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
