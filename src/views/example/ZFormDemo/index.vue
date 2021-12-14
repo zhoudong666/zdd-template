@@ -111,8 +111,8 @@ export default {
           props: {
             // disabled: true,
             placeholder: '9999',
-            resize: 'none'
-            // autosize: true
+            resize: 'none',
+            autosize: true
           }
         },
         // 6.1 日期 选择器
@@ -188,7 +188,7 @@ export default {
         },
         // 12 单选按钮组
         {
-          span: 8,
+          span: 6,
           type: 'radioGroup',
           label: 'my_radio',
           key: 'my_radio',
@@ -199,7 +199,50 @@ export default {
             { value: '1', label: '显示111' },
             { value: '2', label: '显示222' }
           ]
+        },
+        // 13 单选下拉
+        {
+          span: 6,
+          type: 'select',
+          label: 'BaseSelect',
+          key: 'BaseSelect',
+          isRequired: true,
+          // props: { disabled: true },
+          props: { 'value-key': 'key' },
+          defaultValue: '',
+          options: [
+            { value: '1', label: '下拉显示111' },
+            { value: '2', label: '下拉显示222' }
+          ]
         }
+        // // 14 单选下拉
+        // {
+        //   span: 6,
+        //   type: 'select',
+        //   label: 'BaseSelect',
+        //   key: 'BaseSelect',
+        //   isRequired: true,
+        //   // props: { disabled: true },
+        //   defaultValue: '1',
+        //   options: [
+        //     { value: '1', label: '下拉显示111' },
+        //     { value: '2', label: '下拉显示222' }
+        //   ]
+        // },
+        // // 13 单选下拉
+        // {
+        //   span: 6,
+        //   type: 'select',
+        //   label: 'BaseSelect',
+        //   key: 'BaseSelect',
+        //   isRequired: true,
+        //   // props: { disabled: true },
+        //   defaultValue: '1',
+        //   options: [
+        //     { value: '1', label: '下拉显示111' },
+        //     { value: '2', label: '下拉显示222' }
+        //   ]
+        // }
       ],
       toggleFields: [
         {
@@ -236,7 +279,10 @@ export default {
         datetime: '2021-12-14 04:10:44',
         daterange: ['2021-12-03', '2021-12-04'],
         timeSelect1: '09:23',
-        timePicker1: '19:12:23'
+        timePicker1: '19:12:23',
+        timeRangePicker1: ['08:12:43', '18:33:34'],
+        my_radio: '2',
+        BaseSelect: '2'
       }
       this.$refs.aaa.setForm(temp_obj)
     }

@@ -101,9 +101,10 @@ export default {
     props: {}
   },
 
-  // 8 select 单选 和多选
+  // 13 select 单选 和多选
   select: {
-    component: 'ba-select',
+    component: () => import('./base-components/BaseSelect'),
+    defaultVal: '',
     props: {
       clearable: true
     }
