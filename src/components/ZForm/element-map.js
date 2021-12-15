@@ -106,9 +106,23 @@ export default {
     component: () => import('./base-components/BaseSelect'),
     defaultVal: '',
     props: {
+      filterable: true,
       clearable: true
     }
   },
+
+  // 14 multipleSelect 单选 和多选
+  mulSelect: {
+    component: () => import('./base-components/BaseMulSelect'),
+    defaultVal: [],
+    props: {
+      multiple: true, // 多选必须
+      filterable: true,
+      clearable: true
+    }
+  },
+
+  slot: {},
   // 9 自定义 key 和 value 查询集合
   selectInput: {
     component: 'ba-select-input'

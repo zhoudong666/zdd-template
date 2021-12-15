@@ -1,5 +1,5 @@
 <template>
-  <el-select v-model="currValue" v-bind="$attrs" v-on="$listeners">
+  <el-select v-model="currValue" v-bind="$attrs" v-on="$listeners" class="my_mul_select" :style="cssProps">
     <!-- <el-option v-for="opt in options" :key="opt.value" :value="opt.value" :label="opt.label"> </el-option> -->
     <!-- valueKey 用于判断  作为 value 唯一标识的键名，绑定值为对象类型时必填 -->
     <el-option
@@ -15,7 +15,7 @@
 
 <script>
 export default {
-  name: 'BaseSelect',
+  name: 'BaseMulSelect',
   props: {
     options: {
       type: Array,
@@ -32,6 +32,11 @@ export default {
     labelText: {
       type: String,
       default: 'label'
+    },
+    /** 用于限制多选 tag 最大宽度 */
+    tagMaxWidth: {
+      type: String,
+      default: '90px'
     }
   },
   computed: {
@@ -41,6 +46,12 @@ export default {
       },
       set(value) {
         this.$emit('input', value)
+      }
+    },
+    /** 计算 是否传来tag最大宽度 */
+    cssProps() {
+      return {
+        '--tag-max-width': this.tagMaxWidth
       }
     }
   },
@@ -58,8 +69,34 @@ export default {
         return opt[this.valueText]
       }
     }
+  },
+  mounted() {
+    // document.getElementsByClassName('my_mul_select')[0].style.setProperty('--tag-max-width', '140px')
   }
 }
 </script>
 
-<style scoped></style>
+<style lang="scss" scoped>
+.my_mul_select {
+  --tag-max-width: 90px;
+}
+/* ::v-deep .el-select__tags-text {
+  display: inline-block;
+  max-width: 70px;
+  @media (max-width: 1400px) {
+    max-width: 42px;
+  }
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+::v-deep .el-select .el-tag__close.el-icon-close {
+  top: -7px;
+  right: -4px;
+} */
+::v-deep .el-select__tags .el-tag:nth-child(1) {
+  /* max-width: 90px; */
+  max-width: var(--tag-max-width, 90px);
+  overflow: hidden;
+}
+</style>

@@ -3,22 +3,29 @@
     <el-row :gutter="16">
       <el-col v-for="item in formItems" :key="item.key" :span="item.span || 24">
         <el-form-item v-if="item._isShow" :rules="item._rule" :prop="item.key" :label="item.label">
-          <component
-            :is="item.type"
-            v-model.trim="form[item.key]"
-            :options="item.options"
-            v-bind="item.props"
-            v-on="item.events"
-          />
+          <template v-if="item.type === 'slot'">
+            <div>
+              <slot></slot>
+            </div>
+          </template>
+          <template v-else>
+            <component
+              :is="item.type"
+              v-model.trim="form[item.key]"
+              :options="item.options"
+              v-bind="item.props"
+              v-on="item.events"
+            />
+          </template>
         </el-form-item>
       </el-col>
-      <span v-show="innerIsOpen || isOpen">
-        <el-col v-for="item in toggleFormItems" :key="item.key" :span="item.span || 24">
+      <template>
+        <el-col v-show="innerIsOpen || isOpen" v-for="item in toggleFormItems" :key="item.key" :span="item.span || 24">
           <el-form-item v-if="item._isShow" :rules="item._rule" :prop="item.key" :label="item.label">
             <component :is="item.type" v-model.trim="form[item.key]" :options="item.options" v-bind="item.props" />
           </el-form-item>
         </el-col>
-      </span>
+      </template>
       <slot name="search" />
       <el-col :span="controlSpan" v-if="hasControl">
         <el-button type="primary" @click="submit">{{ submitText }}</el-button>

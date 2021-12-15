@@ -2,9 +2,11 @@
   <div class="padding-15">
     <el-card>
       <div slot="header">form title</div>
-      <z-form :fields="fields1" :toggleFields="toggleFields" label-position="right" @submit="onSubmit" ref="aaa">
+      <z-form :fields="fields1" :toggleFields="toggleFields" label-position="right" @submit="onSubmit" ref="formRef">
+        <div>332211</div>
       </z-form>
 
+      <el-button @click="getForm">取值</el-button>
       <el-button @click="setForm">设置值</el-button>
     </el-card>
   </div>
@@ -25,9 +27,12 @@ export default {
       ]
     })
   },
-  data() {
+  data: function () {
     return {
       fields1: [
+        // {
+        //   type: 'slot'
+        // },
         // 1 默认输入类型为input
         {
           span: 6,
@@ -207,28 +212,60 @@ export default {
           label: 'BaseSelect',
           key: 'BaseSelect',
           isRequired: true,
-          // props: { disabled: true },
-          props: { 'value-key': 'key' },
+          props: { valueText: 'code', allowCreate: true },
+          // props: { valueKey: 'value', filterable: true },
           defaultValue: '',
           options: [
-            { value: '1', label: '下拉显示111' },
+            { code: '1', label: '下拉显示111' },
+            { code: '2', label: '下拉显示222' },
+            { code: '3', label: '下拉显示333', disabled: true }
+          ]
+        },
+        // 14 多选下拉
+        {
+          span: 6,
+          type: 'mulSelect',
+          label: '多选下拉',
+          key: 'mulSelect',
+          isRequired: true,
+          // props: { valueKey: 'value',  },
+          props: {
+            'collapse-tags': true
+            // tagMaxWidth: '80px',
+          },
+          defaultValue: [],
+          options: [
+            { value: '1', label: '下拉显下拉显下拉显下拉显示111' },
+            { value: '3', label: '下拉显示333' },
+            { value: '2', label: '下拉显示222' }
+          ],
+          events: {
+            change(val, b) {
+              console.log(val, b)
+              console.log(this)
+              // this.fields1[0].defaultValue = '444'
+            }
+          }
+        },
+        // 14 多选下拉
+        {
+          span: 6,
+          type: 'mulSelect',
+          label: '多选下拉2',
+          key: 'mulSelect2',
+          isRequired: true,
+          // props: { valueKey: 'value',  },
+          props: {
+            tagMaxWidth: '80px',
+            'collapse-tags': true
+          },
+          defaultValue: [],
+          options: [
+            { value: '1', label: '下拉显下拉显下拉显下拉显示111' },
+            { value: '3', label: '下拉显示333' },
             { value: '2', label: '下拉显示222' }
           ]
         }
-        // // 14 单选下拉
-        // {
-        //   span: 6,
-        //   type: 'select',
-        //   label: 'BaseSelect',
-        //   key: 'BaseSelect',
-        //   isRequired: true,
-        //   // props: { disabled: true },
-        //   defaultValue: '1',
-        //   options: [
-        //     { value: '1', label: '下拉显示111' },
-        //     { value: '2', label: '下拉显示222' }
-        //   ]
-        // },
         // // 13 单选下拉
         // {
         //   span: 6,
@@ -249,7 +286,19 @@ export default {
           // type:'input',// 默认类型
           label: '用户名222',
           key: 'name22',
-          span: 12
+          span: 6
+        },
+        {
+          // type:'input',// 默认类型
+          label: '用户名3',
+          key: 'name3',
+          span: 6
+        },
+        {
+          // type:'input',// 默认类型
+          label: '用户名4',
+          key: 'name4',
+          span: 6
         }
       ]
     }
@@ -268,6 +317,7 @@ export default {
       //     })
       // )
     },
+    // 调用子组件里的设值方法
     setForm() {
       var temp_obj = {
         name: 111,
@@ -282,9 +332,13 @@ export default {
         timePicker1: '19:12:23',
         timeRangePicker1: ['08:12:43', '18:33:34'],
         my_radio: '2',
+        // BaseSelect: { value: '1', label: '下拉显示111' }
         BaseSelect: '2'
       }
-      this.$refs.aaa.setForm(temp_obj)
+      this.$refs.formRef.setForm(temp_obj)
+    },
+    getForm() {
+      this.$refs.formRef.setForm()
     }
   }
 }
