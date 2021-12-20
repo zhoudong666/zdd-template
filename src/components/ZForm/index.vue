@@ -1,24 +1,28 @@
 <template>
   <el-form class="pro-form" :ref="formRef" :model="form" v-bind="$attrs" :label-width="labelWidth">
     <el-row :gutter="16">
-      <el-col v-for="item in formItems" :key="item.key" :span="item.span || 24">
-        <el-form-item v-if="item._isShow" :rules="item._rule" :prop="item.key" :label="item.label">
-          <template v-if="item.type === 'slot'">
-            <div>
-              <slot></slot>
-            </div>
-          </template>
-          <template v-else>
-            <component
-              :is="item.type"
-              v-model.trim="form[item.key]"
-              :options="item.options"
-              v-bind="item.props"
-              v-on="item.events"
-            />
-          </template>
-        </el-form-item>
-      </el-col>
+      <template v-for="item in formItems">
+        <template v-if="item.type === 'slot'">
+          <div :key="item.key">
+            <slot v-bind="item.props" v-on="item.events" :data="item.data"></slot>
+            <slot :name="item.name" v-bind="item.props" v-on="item.events" :data="item.props"></slot>
+          </div>
+        </template>
+        <template v-else>
+          <el-col :key="item.key" :span="item.span || 24">
+            <el-form-item v-if="item._isShow" :rules="item._rule" :prop="item.key" :label="item.label">
+              <component
+                :is="item.type"
+                v-model.trim="form[item.key]"
+                :options="item.options"
+                v-bind="item.props"
+                v-on="item.events"
+              />
+            </el-form-item>
+          </el-col>
+        </template>
+      </template>
+
       <template>
         <el-col v-show="innerIsOpen || isOpen" v-for="item in toggleFormItems" :key="item.key" :span="item.span || 24">
           <el-form-item v-if="item._isShow" :rules="item._rule" :prop="item.key" :label="item.label">
