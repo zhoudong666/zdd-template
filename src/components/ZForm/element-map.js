@@ -122,7 +122,9 @@ export default {
     }
   },
 
-  slot: {},
+  slot: {
+    component: 'slot'
+  },
   // 9 自定义 key 和 value 查询集合
   selectInput: {
     component: 'ba-select-input'

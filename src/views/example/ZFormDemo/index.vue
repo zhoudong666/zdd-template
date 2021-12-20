@@ -3,7 +3,7 @@
     <el-card>
       <div slot="header">form title</div>
       <z-form :fields="fields1" :toggleFields="toggleFields" label-position="right" @submit="onSubmit" ref="formRef">
-        <div>332211</div>
+        <div slot="slot1" slot-scope="scope" @click="uuu">{{ JSON.stringify(scope) }}uuuu</div>
       </z-form>
 
       <el-button @click="getForm">取值</el-button>
@@ -30,9 +30,24 @@ export default {
   data: function () {
     return {
       fields1: [
-        // {
-        //   type: 'slot'
-        // },
+        {
+          type: 'slot',
+          label: 'slotsss111',
+          key: 'sslot1111111',
+          name: 'slot1',
+          data: 11,
+          events: {
+            click: function (e) {
+              console.log(e)
+            }
+          }
+        },
+        {
+          type: 'slot',
+          label: 'slotsss222',
+          key: 'sslot22222222',
+          name: 'slot2'
+        },
         // 1 默认输入类型为input
         {
           span: 6,
@@ -304,6 +319,9 @@ export default {
     }
   },
   methods: {
+    uuu(e) {
+      console.log(e)
+    },
     onSubmit(form, valid) {
       console.log('校验结果', { ...form }, valid)
       // const { moreConditions, ...rest } = form
