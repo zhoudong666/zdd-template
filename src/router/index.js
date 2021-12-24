@@ -101,6 +101,24 @@ export const constantRoutes = [
     meta: { title: 'Example', icon: 'el-icon-s-help' },
     children: [
       {
+        path: 'vueQr',
+        name: 'vueQr',
+        component: () => import('@/views/example/vueQr/index'),
+        meta: { title: 'vueQr', icon: 'tree' }
+      },
+      {
+        path: 'splitPaneDemo',
+        name: 'splitPaneDemo',
+        component: () => import('@/views/example/splitPaneDemo/index'),
+        meta: { title: 'splitPaneDemo', icon: 'tree' }
+      },
+      // {
+      //   path: 'agelForm',
+      //   name: 'agelForm',
+      //   component: () => import('@/views/example/agelForm/index'),
+      //   meta: { title: 'agelForm', icon: 'tree' }
+      // },
+      {
         path: 'ZFormDemo',
         name: 'ZFormDemo',
         component: () => import('@/views/example/ZFormDemo/index'),
