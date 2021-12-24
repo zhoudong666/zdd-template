@@ -17,10 +17,18 @@ import '@/icons' // icon
 import '@/router/permission' // permission control
 import './utils/directives.js'
 
+import splitPane from 'vue-splitpane' // 可拖拽组件
 // 自定义组件 全局注册
 import CustomDialog from '@/components/CustomDialog'
 
+// import agelForm from '@/agelComponent'
+
+// Vue.use(agelForm)
+
 Vue.component('CustomDialog', CustomDialog)
+
+// # use as global component
+Vue.component('split-pane', splitPane)
 
 /**
  * If you don't want to use mock-server
@@ -45,5 +53,5 @@ Vue.config.productionTip = false
 new Vue({
   router,
   store,
-  render: h => h(App)
+  render: (h) => h(App)
 }).$mount('#app')
