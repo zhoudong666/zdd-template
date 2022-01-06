@@ -149,6 +149,12 @@ export const constantRoutes = [
         meta: { title: 'Tree', icon: 'tree' }
       },
       {
+        path: 'select-tree',
+        name: 'selectTree',
+        component: () => import('@/views/example/selectTree/index'),
+        meta: { title: 'selectTree', icon: 'tree' }
+      },
+      {
         path: 'ZDialog',
         name: 'ZDialog',
         component: () => import('@/views/example/ZDialog/index'),
