@@ -27,7 +27,6 @@ export function computeFormItem(config, form) {
   // 计算组件真实对应的名称并传入一些默认配置
   const res = ElementMap[item.type || 'input']
   item.type = res.component
-  console.log(res)
   // 设置 placeholder
   const isInput = InputMap.indexOf(item.type) > -1
   if (!res.props) res.props = {}
