@@ -3,10 +3,10 @@
     <el-row :gutter="16">
       <template v-for="item in formItems">
         <template v-if="item.type === 'slot'">
-          <div :key="item.key">
+          <el-col :key="item.key" :span="item.span || 24">
             <slot v-bind="item.props" v-on="item.events" :data="item.data"></slot>
-            <slot :name="item.name" v-bind="item.props" v-on="item.events" :data="item.props"></slot>
-          </div>
+            <slot :name="item.name" v-bind="item.props" v-on="item.events" :data="item.data"></slot>
+          </el-col>
         </template>
         <template v-else>
           <el-col :key="item.key" :span="item.span || 24">
@@ -71,12 +71,12 @@ export default {
     },
     /** fields 表示每个表单项配置组成的数组 */
     fields: {
-      type: Array,
+      type: Object,
       default: () => []
     },
     /** 隐藏可切换表单项 */
     toggleFields: {
-      type: Array,
+      type: Object,
       default: () => []
     },
     /** 是否显示操作按钮 */
@@ -109,10 +109,22 @@ export default {
   },
   computed: {
     formItems() {
-      return this.fields.map((item) => computeFormItem(item, this.form))
+      // return this.fields.map((item) => computeFormItem(item, this.form))
+      var arr = []
+      for (const k in this.fields) {
+        this.$set(this.fields[k], 'key', k)
+        arr.push(computeFormItem(this.fields[k], this.form))
+      }
+      return arr
     },
     toggleFormItems() {
-      return this.toggleFields.map((item) => computeFormItem(item, this.form))
+      // return this.toggleFields.map((item) => computeFormItem(item, this.form))
+      var arr = []
+      for (const k in this.toggleFields) {
+        this.$set(this.toggleFields[k], 'key', k)
+        arr.push(computeFormItem(this.toggleFields[k], this.form))
+      }
+      return arr
     }
   },
   beforeCreate() {
@@ -142,14 +154,25 @@ export default {
       //   // datetime: new Date(),
       //   // undefined: ''
       // }
-      this.fields.concat(this.toggleFields).forEach((item) => {
+      // this.fields.concat(this.toggleFields).forEach((item) => {
+      //   if (item.defaultValue !== undefined) {
+      //     tempFormObj[item.key] = item.defaultValue
+      //   } else {
+      //     // TODO 每种表单类型元素不一样，所以默认值也有所不同
+      //     tempFormObj[item.key] = defaultValMap[item.type || 'input']
+      //   }
+      // })
+      const tempObj = Object.assign({}, this.fields, this.toggleFields)
+      for (const key in tempObj) {
+        const item = tempObj[key]
         if (item.defaultValue !== undefined) {
-          tempFormObj[item.key] = item.defaultValue
+          tempFormObj[key] = item.defaultValue
         } else {
           // TODO 每种表单类型元素不一样，所以默认值也有所不同
-          tempFormObj[item.key] = defaultValMap[item.type || 'input']
+          tempFormObj[key] = defaultValMap[item.type || 'input']
         }
-      })
+      }
+
       return tempFormObj
     },
     submit() {
@@ -170,6 +193,7 @@ export default {
     setForm(valObj) {
       for (const key in valObj) {
         this.form[key] = valObj[key]
+        this.clear()
         // if (form.hasOwnProperty(key)) {
         //   this.form[key] = form[key]
         // }

@@ -20,7 +20,7 @@ export default {
   created() {
     // 模拟请求回来的数据
     setTimeout(() => {
-      this.fields1[2].options = [
+      this.fields1.hobby.options = [
         { value: 1, label: '足球' },
         { value: 2, label: '篮球' },
         { value: 3, label: '排球' }
@@ -29,49 +29,37 @@ export default {
   },
   data: function () {
     return {
-      fields1: [
-        {
-          type: 'slot',
-          label: 'slotsss111',
-          key: 'sslot1111111',
-          name: 'slot1',
-          data: 11,
-          events: {
-            click: function (e) {
-              console.log(e)
-            }
-          }
-        },
-        {
-          type: 'slot',
-          label: 'slotsss222',
-          key: 'sslot22222222',
-          name: 'slot2'
-        },
+      fields1: {
         // 1 默认输入类型为input
-        {
+        name: {
           span: 6,
           type: 'input', // 默认类型
           label: '用户名用户名',
-          key: 'name',
-          isRequired: true,
+          options: [
+            { value: 1, label: '足球' },
+            { value: 2, label: '篮球' },
+            { value: 3, label: '排球' }
+          ],
           isShow: function (form) {
             return true
           },
-          // rule: [
-          //   {
-          //     validator: (rule, value, callback) => {
-          //       if (value === '') callback(new Error('请输入XXX'))
-          //     },
-          //     trigger: 'blur'
-          //   },
-          //   {
-          //     validator: (rule, value, callback) => {
-          //       if (value === '111222') callback(new Error('值不可为111222'))
-          //     },
-          //     trigger: 'change'
-          //   }
-          // ],
+          // isRequired: true, 与 rule 互斥
+          rule: [
+            {
+              validator: (rule, value, callback) => {
+                if (value === '') callback(new Error('请输入XXX'))
+                callback()
+              },
+              trigger: 'blur'
+            },
+            {
+              validator: (rule, value, callback) => {
+                if (value === '111222') callback(new Error('值不可为111222'))
+                callback()
+              },
+              trigger: 'change'
+            }
+          ],
           defaultValue: 'defaultValue',
           props: { placeholder: '8888' /* disabled: true */ },
           events: {
@@ -81,11 +69,10 @@ export default {
           }
         },
         // 2 单个 checkbox
-        {
-          span: 4,
+        isAgree: {
+          span: 6,
           type: 'checkbox',
           label: '是否同意协议',
-          key: 'isAgree',
           defaultValue: true
           // defaultValue: 'on',
           // props: {
@@ -94,11 +81,10 @@ export default {
           // }
         },
         // 3 多个 checkbox
-        {
+        hobby: {
           span: 8,
           type: 'checkboxGroup',
           label: '爱好',
-          key: 'hobby',
           defaultValue: [1, 2],
           options: [],
           events: {
@@ -108,11 +94,10 @@ export default {
           }
         },
         // 4 数字输入框
-        {
+        inputNumber: {
           span: 6,
           type: 'inputNumber',
           label: '数字输入框',
-          key: 'inputNumber',
           defaultValue: 3,
           props: {
             min: 1,
@@ -122,11 +107,10 @@ export default {
           }
         },
         // 5 多行文本
-        {
+        remark: {
           span: 12,
           type: 'textarea',
           label: '文本域',
-          key: 'remark',
           isRequired: true,
           props: {
             // disabled: true,
@@ -136,19 +120,17 @@ export default {
           }
         },
         // 6.1 日期 选择器
-        {
+        date: {
           span: 6,
           type: 'datePicker',
           label: '日期 选择',
-          key: 'date',
           isRequired: true
         },
         // 6.2 日期 时分秒 选择器
-        {
+        datetime: {
           span: 6,
           type: 'datePicker',
-          label: '日期时间 选择',
-          key: 'datetime',
+          label: '日期时间',
           isRequired: true,
           props: {
             type: 'datetime',
@@ -156,11 +138,10 @@ export default {
           }
         },
         // 7 日期 时间段 选择器
-        {
-          span: 12,
+        daterange: {
+          span: 6,
           type: 'dateRangePicker',
-          label: '日期时间 选择',
-          key: 'daterange',
+          label: '时间范围',
           isRequired: true,
           props: {},
           events: {
@@ -170,11 +151,10 @@ export default {
           }
         },
         // 8 固定 时分秒 选择器
-        {
+        timeSelect1: {
           span: 6,
           type: 'timeSelect',
           label: '固定 时分秒',
-          key: 'timeSelect1',
           isRequired: true,
           props: {
             'picker-options': {
@@ -185,11 +165,10 @@ export default {
           }
         },
         // 9 任意 时分秒 选择器
-        {
+        timePicker1: {
           span: 6,
           type: 'timePicker',
           label: '任意 时分秒',
-          key: 'timePicker1',
           isRequired: true,
           props: {
             'picker-options': {
@@ -198,20 +177,18 @@ export default {
           }
         },
         // 11 任意 时分秒 时间段 选择器
-        {
+        timeRangePicker1: {
           span: 6,
           type: 'timeRangePicker',
           label: '时分秒时间段',
-          key: 'timeRangePicker1',
           isRequired: true,
           props: {}
         },
         // 12 单选按钮组
-        {
+        my_radio: {
           span: 6,
           type: 'radioGroup',
           label: 'my_radio',
-          key: 'my_radio',
           isRequired: true,
           // props: { disabled: true },
           defaultValue: '1',
@@ -221,15 +198,14 @@ export default {
           ]
         },
         // 13 单选下拉
-        {
+        BaseSelect: {
           span: 6,
           type: 'select',
           label: 'BaseSelect',
-          key: 'BaseSelect',
           isRequired: true,
           props: { valueText: 'code', allowCreate: true },
           // props: { valueKey: 'value', filterable: true },
-          defaultValue: '',
+          defaultValue: '2',
           options: [
             { code: '1', label: '下拉显示111' },
             { code: '2', label: '下拉显示222' },
@@ -237,18 +213,17 @@ export default {
           ]
         },
         // 14 多选下拉
-        {
+        mulSelect: {
           span: 6,
           type: 'mulSelect',
           label: '多选下拉',
-          key: 'mulSelect',
           isRequired: true,
           // props: { valueKey: 'value',  },
           props: {
             'collapse-tags': true
             // tagMaxWidth: '80px',
           },
-          defaultValue: [],
+          defaultValue: ['2'],
           options: [
             { value: '1', label: '下拉显下拉显下拉显下拉显示111' },
             { value: '3', label: '下拉显示333' },
@@ -263,26 +238,25 @@ export default {
           }
         },
         // 14 多选下拉
-        {
+        mulSelect2: {
           span: 6,
           type: 'mulSelect',
           label: '多选下拉2',
-          key: 'mulSelect2',
           isRequired: true,
           // props: { valueKey: 'value',  },
           props: {
             tagMaxWidth: '80px',
             'collapse-tags': true
           },
-          defaultValue: [],
+          defaultValue: ['2', '3'],
           options: [
             { value: '1', label: '下拉显下拉显下拉显下拉显示111' },
             { value: '3', label: '下拉显示333' },
             { value: '2', label: '下拉显示222' }
           ]
-        }
+        },
         // // 13 单选下拉
-        // {
+        // BaseSelect:{
         //   span: 6,
         //   type: 'select',
         //   label: 'BaseSelect',
@@ -295,27 +269,36 @@ export default {
         //     { value: '2', label: '下拉显示222' }
         //   ]
         // }
-      ],
-      toggleFields: [
-        {
+        sslot1111111: {
+          span: 6,
+          type: 'slot',
+          label: 'slotsss111',
+          name: 'slot1',
+          data: { aa: '11' },
+          events: {
+            click: function (e) {
+              console.log(e)
+            }
+          }
+        }
+      },
+      toggleFields: {
+        name22: {
           // type:'input',// 默认类型
           label: '用户名222',
-          key: 'name22',
           span: 6
         },
-        {
+        name3: {
           // type:'input',// 默认类型
           label: '用户名3',
-          key: 'name3',
           span: 6
         },
-        {
+        name4: {
           // type:'input',// 默认类型
           label: '用户名4',
-          key: 'name4',
           span: 6
         }
-      ]
+      }
     }
   },
   methods: {
@@ -356,7 +339,7 @@ export default {
       this.$refs.formRef.setForm(temp_obj)
     },
     getForm() {
-      this.$refs.formRef.setForm()
+      console.log(this.$refs.formRef.form)
     }
   }
 }
