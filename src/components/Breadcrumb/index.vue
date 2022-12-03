@@ -12,7 +12,8 @@
 </template>
 
 <script>
-import { pathToRegexp } from 'path-to-regexp'
+// import { pathToRegexp } from 'path-to-regexp'
+import * as pathToRegexp from 'path-to-regexp' // 插件引入方式改变 防止点击面包屑报错
 
 export default {
   data() {
