@@ -1,10 +1,6 @@
 <template>
   <div :class="classObj" class="app-wrapper">
-    <div
-      v-if="device === 'mobile' && sidebar.opened"
-      class="drawer-bg"
-      @click="handleClickOutside"
-    />
+    <div v-if="device === 'mobile' && sidebar.opened" class="drawer-bg" @click="handleClickOutside" />
     <sidebar class="sidebar-container" />
     <div class="main-container">
       <div :class="{ 'fixed-header': fixedHeader }">
@@ -12,11 +8,12 @@
       </div>
       <app-main />
     </div>
+    <div class="my-footer" :class="{ closed: !$store.state.app.sidebar.opened }"><LayoutFooter></LayoutFooter></div>
   </div>
 </template>
 
 <script>
-import { Navbar, Sidebar, AppMain } from './components'
+import { Navbar, Sidebar, AppMain, LayoutFooter } from './components'
 import ResizeMixin from './mixin/ResizeHandler'
 
 export default {
@@ -24,7 +21,8 @@ export default {
   components: {
     Navbar,
     Sidebar,
-    AppMain
+    AppMain,
+    LayoutFooter
   },
   mixins: [ResizeMixin],
   computed: {
@@ -93,5 +91,16 @@ export default {
 
 .mobile .fixed-header {
   width: 100%;
+}
+.my-footer {
+  position: absolute;
+  width: calc(100% - #{$sideBarWidth});
+  bottom: 0;
+  right: 0;
+  height: $footerHeight;
+  text-align: center;
+  &.closed {
+    width: calc(100% - 54px);
+  }
 }
 </style>

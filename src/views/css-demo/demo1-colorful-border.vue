@@ -10,6 +10,7 @@
   height: 300px;
   margin: 0 auto;
   position: relative;
+  z-index: 9;
 }
 .bb,
 .bb::before,

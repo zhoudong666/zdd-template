@@ -17,5 +17,7 @@ module.exports = {
    * @type {boolean} true | false
    * @description Whether show the logo in sidebar
    */
-  sidebarLogo: true
+  sidebarLogo: true,
+
+  footer: 'copyright © 2017 XXXX 科技股份有限公司出品'
 }

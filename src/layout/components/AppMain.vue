@@ -1,7 +1,11 @@
 <template>
   <section class="app-main">
     <transition name="fade-transform" mode="out-in">
-      <router-view :key="key" />
+      <div class="page-container">
+        <el-scrollbar>
+          <router-view :key="key" />
+        </el-scrollbar>
+      </div>
     </transition>
   </section>
 </template>
@@ -17,15 +21,24 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+@import '~@/styles/variables.scss';
 .app-main {
   /*50 = navbar  */
-  min-height: calc(100vh - 50px);
+  height: calc(100vh - #{$footerHeight});
   width: 100%;
   position: relative;
   overflow: hidden;
+  background-color: #eee;
+  .page-container {
+    height: 100%;
+    padding: 20px;
+    & > .el-scrollbar {
+      background-color: #fff;
+    }
+  }
 }
-.fixed-header+.app-main {
+.fixed-header + .app-main {
   padding-top: 50px;
 }
 </style>
