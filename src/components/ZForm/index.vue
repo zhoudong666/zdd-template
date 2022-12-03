@@ -69,15 +69,15 @@ export default {
       type: Boolean,
       default: false
     },
-    /** fields 表示每个表单项配置组成的数组 */
+    /** fields 表示每个表单项配置组成的对象 */
     fields: {
       type: Object,
-      default: () => []
+      default: () => ({})
     },
     /** 隐藏可切换表单项 */
     toggleFields: {
       type: Object,
-      default: () => []
+      default: () => ({})
     },
     /** 是否显示操作按钮 */
     hasControl: {

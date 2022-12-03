@@ -34,7 +34,7 @@ export default {
         name: {
           span: 6,
           type: 'input', // 默认类型
-          label: '用户名用户名',
+          label: '用户名',
           options: [
             { value: 1, label: '足球' },
             { value: 2, label: '篮球' },

@@ -7,8 +7,7 @@ export default {
     // 传递给 Element 组件的默认 props
     props: {
       clearable: true,
-      style: { width: '100%' },
-      placeholder: '请输入'
+      style: { width: '100%' }
     }
   },
   // 2 单个 checkbox
@@ -35,8 +34,7 @@ export default {
     defaultVal: '',
     props: {
       type: 'textarea',
-      rows: 3,
-      placeholder: '请输入'
+      rows: 3
     }
   },
   // 6 单个日期时间选择器
@@ -46,7 +44,6 @@ export default {
     props: {
       type: 'date',
       editable: false,
-      placeholder: '请选择',
       valueFormat: 'yyyy-MM-dd'
     }
   },
@@ -57,8 +54,8 @@ export default {
     props: {
       type: 'daterange',
       editable: false,
-      startPlaceholder: '请选择',
-      endPlaceholder: '请选择',
+      startPlaceholder: '请选择开始时间',
+      endPlaceholder: '请选择结束时间',
       unlinkPanels: true,
       // rangeSeparator: '至',
       valueFormat: 'yyyy-MM-dd'
@@ -69,8 +66,7 @@ export default {
     component: 'el-time-select',
     defaultVal: '',
     props: {
-      editable: false,
-      placeholder: '请选择'
+      editable: false
     }
   },
   // 9 任意时间点 时间选择器
@@ -79,7 +75,6 @@ export default {
     defaultVal: '',
     props: {
       editable: false,
-      placeholder: '请选择',
       valueFormat: 'HH:mm:ss'
     }
   },
@@ -90,7 +85,6 @@ export default {
     props: {
       editable: false,
       isRange: true,
-      placeholder: '请选择',
       valueFormat: 'HH:mm:ss'
     }
   },

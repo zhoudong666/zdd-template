@@ -17,6 +17,8 @@ import '@/icons' // icon
 import '@/router/permission' // permission control
 import './utils/directives.js'
 
+import '@/components/index.js' // 全局组件引入
+
 import splitPane from 'vue-splitpane' // 可拖拽组件
 // 自定义组件 全局注册
 import CustomDialog from '@/components/CustomDialog'

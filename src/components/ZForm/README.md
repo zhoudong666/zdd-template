@@ -29,7 +29,7 @@
 // 1 默认输入类型为input
 {
   // type:'input',// 默认类型
-  label: '用户名用户名',
+  label: '用户名',
   key: 'name',
   // isRequired: true,
   isShow: function (form) {
