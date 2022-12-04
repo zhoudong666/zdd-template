@@ -1,13 +1,22 @@
 .flex {
   display: flex;
 }
+.justify-center {
+  justify-content: center;
+}
+.justify-between {
+  justify-content: space-between;
+}
+.justify-around {
+  justify-content: space-around;
+}
 .pointer {
   cursor: pointer;
 }
-.float-left {
+.fl {
   float: left;
 }
-.float-right {
+.fr {
   float: right;
 }
 
@@ -34,34 +43,34 @@
   .fs-#{$fontsize} {
     font-size: $fontsize + 0px;
   }
-  .padding-#{$fontsize} {
+  .p-#{$fontsize} {
     padding: $fontsize + 0px;
   }
-  .padding-top-#{$fontsize} {
+  .pt-#{$fontsize} {
     padding-top: $fontsize + 0px;
   }
-  .padding-bottom-#{$fontsize} {
+  .pb-#{$fontsize} {
     padding-bottom: $fontsize + 0px;
   }
-  .padding-right-#{$fontsize} {
+  .pr-#{$fontsize} {
     padding-right: $fontsize + 0px;
   }
-  .padding-left-#{$fontsize} {
+  .pl-#{$fontsize} {
     padding-left: $fontsize + 0px;
   }
-  .margin-#{$fontsize} {
+  .m-#{$fontsize} {
     margin: $fontsize + 0px;
   }
-  .margin-top-#{$fontsize} {
+  .mt-#{$fontsize} {
     margin-top: $fontsize + 0px;
   }
-  .margin-bottom-#{$fontsize} {
+  .mb-#{$fontsize} {
     margin-bottom: $fontsize + 0px;
   }
-  .margin-right-#{$fontsize} {
+  .mr-#{$fontsize} {
     margin-right: $fontsize + 0px;
   }
-  .margin-left-#{$fontsize} {
+  .ml-#{$fontsize} {
     margin-left: $fontsize + 0px;
   }
 }
