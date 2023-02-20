@@ -1,10 +1,11 @@
 <template>
-  <div class="icon-container">
+  <div class="icon-container clearfix">
     <div>使用方法</div>
-    &lt;svg-icon icon-class="table">&lt;/svg-icon>
+    <span class="text-red"> &lt;svg-icon icon-class="table">&lt;/svg-icon> </span>
+
     <hr />
-    <template v-for="(item, index) in iconList">
-      <div class="icon-item" :key="item">
+    <template>
+      <div class="icon-item" v-for="(item, index) in iconList" :key="item">
         <svg-icon :icon-class="item" :key="index"></svg-icon>
         <span> {{ item }}</span>
       </div>
@@ -20,7 +21,7 @@ export default {
 
   data() {
     return {
-      iconList: []
+      iconList: [],
     }
   },
 
@@ -31,18 +32,19 @@ export default {
         arr.push(curr.split('.')[1].slice(1))
         return arr
       }, [])
-      console.log(list)
+      // console.log(list)
       this.iconList = list
     })
   },
 
-  methods: {}
+  methods: {},
 }
 </script>
 
 <style lang="scss" scoped>
 .icon-container {
   padding: 10px;
+  background-color: #fff;
 }
 .icon-item {
   float: left;
