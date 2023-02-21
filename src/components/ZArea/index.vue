@@ -59,7 +59,7 @@ export default {
   },
   data() {
     return {
-      showPcaCode: [],
+      showPcaCode: [110000000000, 110100000000, 110101000000],
       addShopForm: {
         province: '',
         city: '',

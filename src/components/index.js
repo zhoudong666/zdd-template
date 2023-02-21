@@ -6,7 +6,7 @@ import ZQrCode from '@/components/ZQrCode'
 import ZArea from '@/components/ZArea'
 import ZImageUpload from '@/components/ZUpload/ZImageUpload'
 import ZFileUpload from '@/components/ZUpload/ZFileUpload'
-import ZTextareaDialog from '@/components/ZTextareaDialog/index'
+import ZTextareaDialog from '@/components/ZTextareaDialog'
 
 import { confirm } from '@/components/ZConfirm'
 Vue.prototype.zConfirm = confirm

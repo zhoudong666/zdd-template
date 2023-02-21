@@ -68,6 +68,7 @@ export default {
     // 是否显示提示
     isShowTip: { type: Boolean, default: false },
     disabled: { type: Boolean },
+    token: { type: String },
   },
   data() {
     return {
@@ -78,7 +79,7 @@ export default {
       hideUpload: false,
       baseUrl: process.env.VUE_APP_BASE_API,
       uploadImgUrl: process.env.VUE_APP_BASE_API + fileUploadUrlStr, // 上传的图片服务器地址
-      headers: { Authorization: getToken() },
+      headers: { Authorization: getToken() || this.token },
       fileList: [],
       isResponseStr: true,
       uploadData: { originalFileName: '' },

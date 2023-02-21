@@ -73,12 +73,13 @@ export default {
     // 是否显示提示
     isShowTip: { type: Boolean, default: true },
     disabled: { type: Boolean },
+    token: { type: String },
   },
   data() {
     return {
       baseUrl: process.env.VUE_APP_BASE_API,
       uploadFileUrl: process.env.VUE_APP_BASE_API + fileUploadUrlStr, // 上传的图片服务器地址
-      headers: { Authorization: getToken() },
+      headers: { Authorization: getToken() || this.token },
       fileList: [],
       uploadData: { originalFileName: '' },
     }
