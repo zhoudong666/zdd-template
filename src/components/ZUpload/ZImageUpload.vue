@@ -28,7 +28,7 @@
     </el-upload>
 
     <!-- 上传提示 -->
-    <div class="el-upload__tip" slot="tip" v-if="showTip">
+    <div class="el-upload__tip" slot="tip" v-if="showTip && !disabled">
       请上传
       <template v-if="fileSize">
         大小不超过 <b style="color: #f56c6c">{{ fileSize }}MB</b>
@@ -47,7 +47,10 @@
 
 <script>
 import { getToken } from '@/utils/auth'
-import { fileServer, fileUploadUrlStr } from '@/api/upload'
+import { fileServer, fileUploadUrlStr } from './uploadAPI.js'
+
+import { Loading } from 'element-ui'
+let loadingInstance
 
 export default {
   name: 'ZImageUpload',
@@ -123,6 +126,20 @@ export default {
     },
   },
   methods: {
+    // 打开遮罩层
+    loading(content) {
+      loadingInstance = Loading.service({
+        lock: true,
+        text: content,
+        spinner: 'el-icon-loading',
+        background: 'rgba(0, 0, 0, 0.7)',
+      })
+    },
+    // 关闭遮罩层
+    closeLoading() {
+      loadingInstance.close()
+    },
+
     // 上传前loading加载
     handleBeforeUpload(file) {
       this.uploadData.originalFileName = file.name.split('.')[0]
@@ -152,7 +169,7 @@ export default {
           return false
         }
       }
-      this.$modal.loading('正在上传图片，请稍候...')
+      this.loading('正在上传图片，请稍候...')
       this.number++
     },
     // 文件个数超出
@@ -167,7 +184,7 @@ export default {
         this.uploadedSuccessfully()
       } else {
         this.number--
-        this.$modal.closeLoading()
+        this.closeLoading()
         this.$message.error(res.msg)
         this.$refs.imageUpload.handleRemove(file)
         this.uploadedSuccessfully()
@@ -185,7 +202,7 @@ export default {
     // 上传失败
     handleUploadError() {
       this.$message.error('上传图片失败，请重试')
-      this.$modal.closeLoading()
+      this.closeLoading()
     },
     // 上传结束处理
     uploadedSuccessfully() {
@@ -195,7 +212,7 @@ export default {
         this.number = 0
         const urlData = this.isResponseStr ? this.listToString(this.fileList) : this.fileList
         this.$emit('input', urlData)
-        this.$modal.closeLoading()
+        this.closeLoading()
       }
     },
     // 预览

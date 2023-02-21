@@ -7,7 +7,13 @@
             <!-- <slot v-bind="item.props" v-on="item.events" :data="item.data"></slot>
             <slot :name="item.key" v-bind="item.props" v-on="item.events" :data="item.data"></slot> -->
             <template v-if="item.label">
-              <el-form-item v-if="item._isShow" :rules="item._rule" :prop="item.key" :label="item.label">
+              <el-form-item
+                v-if="item._isShow"
+                :rules="item._rule"
+                :prop="item.key"
+                :label="item.label"
+                v-bind="item.props"
+              >
                 <slot v-bind="item.props" v-on="item.events" :data="form"></slot>
                 <slot :name="item.key" v-bind="item.props" v-on="item.events" :data="form"></slot>
               </el-form-item>
@@ -21,14 +27,8 @@
           </el-col>
         </template>
         <template v-else>
-          <el-col :key="item.key" :span="item.span || 24">
-            <el-form-item
-              v-if="item._isShow"
-              :rules="item._rule"
-              :prop="item.key"
-              :label="item.label"
-              v-bind="item.props"
-            >
+          <el-col :key="item.key" :span="item.span || 24" v-if="item._isShow">
+            <el-form-item :rules="item._rule" :prop="item.key" :label="item.label" v-bind="item.props">
               <component
                 :is="item.type"
                 v-model.trim="form[item.key]"
@@ -230,9 +230,31 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 .pro-form {
   /* padding: 12px; */
   background: white;
+
+  [my_switch='my_switch'] {
+    ::v-deep .el-switch__core {
+      width: 56px !important;
+    }
+    .el-switch {
+      &:after {
+        content: '关闭';
+        font-size: 10px;
+        color: #fff;
+        position: absolute;
+        left: 22px;
+      }
+      &.is-checked:after {
+        content: '开启';
+        font-size: 10px;
+        color: #fff;
+        position: absolute;
+        left: 8px;
+      }
+    }
+  }
 }
 </style>

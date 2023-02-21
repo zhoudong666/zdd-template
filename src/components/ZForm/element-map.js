@@ -47,6 +47,24 @@ export default {
       valueFormat: 'yyyy-MM-dd',
     },
   },
+  monthPicker: {
+    component: 'el-date-picker',
+    defaultVal: '',
+    props: {
+      type: 'month',
+      editable: false,
+      valueFormat: 'yyyy-MM',
+    },
+  },
+  yearPicker: {
+    component: 'el-date-picker',
+    defaultVal: '',
+    props: {
+      type: 'year',
+      editable: false,
+      valueFormat: 'yyyy',
+    },
+  },
   // 7 日期时间段 选择器
   dateRangePicker: {
     component: 'el-date-picker',
@@ -113,6 +131,28 @@ export default {
       multiple: true, // 多选必须
       filterable: true,
       clearable: true,
+    },
+  },
+  // 15 Switch
+  switch: {
+    component: 'el-switch',
+    defaultVal: 0,
+    props: {
+      activeValue: 1,
+      inactiveValue: 0,
+      activeColor: '#13ce66',
+      inactiveColor: '#ff4949',
+      my_switch: 'my_switch',
+    },
+  },
+
+  // 16 季度选择器
+  quarterPicker: {
+    component: () => import('./base-components/QuarterPicker'),
+    // defaultVal: [],
+    props: {
+      format: 'yyyy年Q季度',
+      valueFormat: 'yyyyMM',
     },
   },
 

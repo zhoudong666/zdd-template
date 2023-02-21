@@ -13,6 +13,28 @@
   </ZDialog>
 </template>
 
+<!-- <ZTextareaDialog
+        :visible.sync="isZTextareaDialog"
+        inputType="input"
+        title="该出库单未填写联单号，是否现在填写"
+        label="出库联单号"
+        v-model="transNo"
+        @sureBtn="textareaSure"
+        @cancelBtn="textareaCancel"
+        />
+
+      isZTextareaDialog: false,
+      transNo: '',
+
+      textareaSure() {
+        console.log('确认按钮')
+      },
+      textareaCancel() {
+        console.log('取消按钮')
+      },
+
+      -->
+
 <script>
 export default {
   name: 'ZTextareaDialog',

@@ -1,8 +1,7 @@
 <template>
-  <div class="icon-container clearfix">
+  <div class="icon-container">
     <div>使用方法</div>
-    <span class="text-red"> &lt;svg-icon icon-class="table">&lt;/svg-icon> </span>
-
+    &lt;svg-icon icon-class="table">&lt;/svg-icon>
     <hr />
     <template>
       <div class="icon-item" v-for="(item, index) in iconList" :key="item">
@@ -44,7 +43,6 @@ export default {
 <style lang="scss" scoped>
 .icon-container {
   padding: 10px;
-  background-color: #fff;
 }
 .icon-item {
   float: left;

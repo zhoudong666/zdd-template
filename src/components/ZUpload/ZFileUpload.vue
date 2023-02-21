@@ -54,7 +54,7 @@
 
 <script>
 import { getToken } from '@/utils/auth'
-import { fileServer, fileUploadUrlStr } from '@/api/upload'
+import { fileServer, fileUploadUrlStr } from './uploadAPI.js'
 
 export default {
   name: 'ZFileUpload',
