@@ -1,11 +1,15 @@
 <template>
   <el-breadcrumb class="app-breadcrumb" separator="/">
     <transition-group name="breadcrumb">
-      <el-breadcrumb-item v-for="(item, index) in levelList" :key="item.path">
-        <span v-if="item.redirect === 'noRedirect' || index == levelList.length - 1" class="no-redirect">
-          {{ item.meta.title }}</span
-        >
-        <a v-else @click.prevent="handleLink(item)">{{ item.meta.title }}</a>
+      <el-breadcrumb-item v-for="(item, index) in levelList" :key="item.path + index">
+        <!-- 对面包屑特殊处理,只有欢迎页能点击, 是因为, 菜单是动态的, 不好重定向 -->
+        <!-- <span v-if="item.redirect === 'noRedirect' || index == levelList.length - 1" class="no-redirect">
+          {{ item.meta.title }}
+        </span>
+        <a v-else @click.prevent="handleLink(item)">{{ item.meta.title }}</a> -->
+
+        <a v-if="item.meta.title === '欢迎页'" @click.prevent="handleLink(item)">{{ item.meta.title }}</a>
+        <span v-else class="no-redirect" style="cursor: text">{{ item.meta.title }}</span>
       </el-breadcrumb-item>
     </transition-group>
   </el-breadcrumb>
@@ -13,18 +17,19 @@
 
 <script>
 // import { pathToRegexp } from 'path-to-regexp'
-import * as pathToRegexp from 'path-to-regexp' // 插件引入方式改变 防止点击面包屑报错
+
+import * as pathToRegexp from 'path-to-regexp'
 
 export default {
   data() {
     return {
-      levelList: null
+      levelList: null,
     }
   },
   watch: {
     $route() {
       this.getBreadcrumb()
-    }
+    },
   },
   created() {
     this.getBreadcrumb()
@@ -34,9 +39,8 @@ export default {
       // only show routes with meta.title
       let matched = this.$route.matched.filter((item) => item.meta && item.meta.title)
       const first = matched[0]
-
       if (!this.isDashboard(first)) {
-        matched = [{ path: '/dashboard', meta: { title: '首页' } }].concat(matched)
+        matched = [{ path: '/', meta: { title: '欢迎页' } }].concat(matched)
       }
 
       this.levelList = matched.filter((item) => item.meta && item.meta.title && item.meta.breadcrumb !== false)
@@ -61,8 +65,8 @@ export default {
         return
       }
       this.$router.push(this.pathCompile(path))
-    }
-  }
+    },
+  },
 }
 </script>
 
