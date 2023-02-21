@@ -1,11 +1,19 @@
 <template>
-  <el-dialog :visible.sync="innerVisible" v-bind="$attrs" v-on="$listeners">
+  <el-dialog
+    v-if="innerVisible"
+    :title="title"
+    :visible.sync="innerVisible"
+    v-bind="$attrs"
+    v-on="$listeners"
+    :close-on-click-modal="false"
+  >
     <slot>
       <p>弹框自定义的内容</p>
     </slot>
-    <span slot="footer" class="dialog-footer" v-if="hasBtns">
-      <el-button type="primary" @click="sureBtn">确 定</el-button>
-      <el-button @click="cancelBtn" v-if="!oneBtn">取 消</el-button>
+    <span slot="footer" class="dialog-footer" v-if="hasFooter">
+      <el-button @click="cancelBtn">{{ cancelBtnText }}</el-button>
+      <slot name="footerBtn"></slot>
+      <el-button type="primary" v-if="!oneBtn" @click="sureBtn">{{ sureBtnText }}</el-button>
     </span>
   </el-dialog>
 </template>
@@ -15,20 +23,23 @@ export default {
   name: 'ZDialog',
 
   // 写法 111 ----------start
-  model: {
-    prop: 'innerVisible', // 定义外层 v-model 传进来的 prop 接收字段
-    event: 'self_event' // 定义外层 v-model 接收的事件名
-  },
+  // model: {
+  //   prop: 'innerVisible', // 定义外层 v-model 传进来的 prop 接收字段
+  //   event: 'self_event' // 定义外层 v-model 接收的事件名
+  // },
   props: {
-    innerVisible: Boolean, // 需要在组件的 props 选项里声明 innerVisible 这个 prop
-    hasBtns: {
-      type: Boolean,
-      default: true
-    },
-    oneBtn: {
-      type: Boolean,
-      default: false
-    }
+    // innerVisible: Boolean, // 需要在组件的 props 选项里声明 innerVisible 这个 prop
+
+    title: { type: String, default: 'title' },
+    visible: { type: Boolean, default: false },
+    /** 是否需要底部按钮 */
+    hasFooter: { type: Boolean, default: true },
+    /** 是否只要一个确认按钮 */
+    oneBtn: { type: Boolean, default: false },
+    /** 确认按钮文字 */
+    sureBtnText: { type: String, default: '确定' },
+    /** 取消按钮文字 */
+    cancelBtnText: { type: String, default: '取消' },
   },
   // 写法 111 ----------end
 
@@ -48,10 +59,17 @@ export default {
   // },
   // 写法 222 ----------end
 
-  mounted() {
-    // console.log(this.$listeners)
+  mounted() {},
+  computed: {
+    innerVisible: {
+      get() {
+        return this.visible
+      },
+      set(val) {
+        this.$emit('update:visible', val)
+      },
+    },
   },
-  computed: {},
 
   methods: {
     sureBtn() {
@@ -61,23 +79,24 @@ export default {
       this.$emit('cancelBtn')
     },
     beforeClose() {
-      this.$emit('self_event', !this.innerVisible) /** 写法 111 */
+      // this.$emit('self_event', !this.innerVisible) /** 写法 111 */
       // this.innerVisible = !this.innerVisible;  /** 写法 222 */
-    }
-  }
+    },
+  },
 }
 </script>
 
 <style lang="scss" scoped>
 ::v-deep .el-dialog__header {
   padding: 10px 15px;
-  border-bottom: 1px solid #ccc;
+  border-bottom: 1px solid #ebeef5;
 }
 ::v-deep .el-dialog__body {
   padding: 10px;
 }
 ::v-deep .el-dialog__footer {
-  padding: 10px 15px;
+  padding: 0 15px 15px;
+  // text-align: center;
 }
 ::v-deep .el-dialog__headerbtn {
   top: 13px;

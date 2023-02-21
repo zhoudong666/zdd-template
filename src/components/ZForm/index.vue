@@ -1,16 +1,34 @@
 <template>
-  <el-form class="pro-form" :ref="formRef" :model="form" v-bind="$attrs" :label-width="labelWidth">
+  <el-form class="pro-form" :ref="formRef" :model="form" v-bind="$attrs" :label-width="labelWidth" label-suffix=" :">
     <el-row :gutter="16">
       <template v-for="item in formItems">
         <template v-if="item.type === 'slot'">
           <el-col :key="item.key" :span="item.span || 24">
-            <slot v-bind="item.props" v-on="item.events" :data="item.data"></slot>
-            <slot :name="item.name" v-bind="item.props" v-on="item.events" :data="item.data"></slot>
+            <!-- <slot v-bind="item.props" v-on="item.events" :data="item.data"></slot>
+            <slot :name="item.key" v-bind="item.props" v-on="item.events" :data="item.data"></slot> -->
+            <template v-if="item.label">
+              <el-form-item v-if="item._isShow" :rules="item._rule" :prop="item.key" :label="item.label">
+                <slot v-bind="item.props" v-on="item.events" :data="form"></slot>
+                <slot :name="item.key" v-bind="item.props" v-on="item.events" :data="form"></slot>
+              </el-form-item>
+            </template>
+            <template v-else>
+              <div>
+                <slot v-bind="item.props" v-on="item.events" :data="form"></slot>
+                <slot :name="item.key" v-bind="item.props" v-on="item.events" :data="form"></slot>
+              </div>
+            </template>
           </el-col>
         </template>
         <template v-else>
           <el-col :key="item.key" :span="item.span || 24">
-            <el-form-item v-if="item._isShow" :rules="item._rule" :prop="item.key" :label="item.label">
+            <el-form-item
+              v-if="item._isShow"
+              :rules="item._rule"
+              :prop="item.key"
+              :label="item.label"
+              v-bind="item.props"
+            >
               <component
                 :is="item.type"
                 v-model.trim="form[item.key]"
@@ -31,7 +49,7 @@
         </el-col>
       </template>
       <slot name="search" />
-      <el-col :span="controlSpan" v-if="hasControl">
+      <el-col :span="controlSpan" v-if="hasControl" :class="{ 'text-right': controlSpan == 24 }">
         <el-button type="primary" @click="submit">{{ submitText }}</el-button>
         <el-button @click="reset">{{ resetText }}</el-button>
         <el-button v-if="toggleFormItems.length" @click="openOrClose">
@@ -57,54 +75,54 @@ export default {
     formRef: {
       type: String,
       // required: true,
-      default: 'form'
+      default: 'form',
     },
     /** label 的宽度 */
     labelWidth: {
       type: String,
-      default: '110px'
+      default: '110px',
     },
     /** 有折叠项情况下 是否展开 */
     isOpen: {
       type: Boolean,
-      default: false
+      default: false,
     },
     /** fields 表示每个表单项配置组成的对象 */
     fields: {
       type: Object,
-      default: () => ({})
+      default: () => ({}),
     },
     /** 隐藏可切换表单项 */
     toggleFields: {
       type: Object,
-      default: () => ({})
+      default: () => ({}),
     },
     /** 是否显示操作按钮 */
     hasControl: {
       type: Boolean,
-      default: true
+      default: true,
     },
     /** 控制按钮所占份数 */
     controlSpan: {
       type: Number,
-      default: 8
+      default: 6,
     },
     /** 提交按钮文本 */
     submitText: {
       type: String,
-      default: '提交'
+      default: '提交',
     },
     /** 重置按钮文本 */
     resetText: {
       type: String,
-      default: '重置'
-    }
+      default: '重置',
+    },
   },
   data() {
     return {
       // data里的 函数 会在 beforecreate 后   created 前 执行
       form: this.initForm(),
-      innerIsOpen: false
+      innerIsOpen: false,
     }
   },
   computed: {
@@ -112,6 +130,7 @@ export default {
       // return this.fields.map((item) => computeFormItem(item, this.form))
       var arr = []
       for (const k in this.fields) {
+        // this.fields[k].key = k
         this.$set(this.fields[k], 'key', k)
         arr.push(computeFormItem(this.fields[k], this.form))
       }
@@ -125,7 +144,7 @@ export default {
         arr.push(computeFormItem(this.toggleFields[k], this.form))
       }
       return arr
-    }
+    },
   },
   beforeCreate() {
     // console.log('beforeCreate: computed 还没有执行 ', this.formItems)
@@ -176,14 +195,18 @@ export default {
       return tempFormObj
     },
     submit() {
-      this.$refs[this.formRef].validate((valid) => {
-        // 此处未获取到ba-select-input的选项值?
-        this.$emit('submit', this.form, valid)
+      return new Promise((resolve) => {
+        this.$refs[this.formRef].validate((valid) => {
+          // 此处未获取到ba-select-input的选项值?
+          this.$emit('submit', this.form, valid)
+          resolve(valid)
+        })
       })
     },
     /** 重置表单 */
     reset() {
       this.$refs[this.formRef].resetFields()
+      this.$emit('reset', this.form)
     },
     /** 清除表单校验 */
     clear() {
@@ -202,8 +225,8 @@ export default {
     /** 控制显示与隐藏 */
     openOrClose() {
       this.innerIsOpen = !this.innerIsOpen
-    }
-  }
+    },
+  },
 }
 </script>
 

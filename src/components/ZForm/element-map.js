@@ -7,26 +7,26 @@ export default {
     // 传递给 Element 组件的默认 props
     props: {
       clearable: true,
-      style: { width: '100%' }
-    }
+      style: { width: '100%' },
+    },
   },
   // 2 单个 checkbox
   checkbox: {
     component: 'el-checkbox',
     defaultVal: false,
-    props: {}
+    props: {},
   },
   // 3 多个 checkbox
   checkboxGroup: {
     component: () => import('./base-components/BaseCheckboxGroup'),
     defaultVal: [],
-    props: {}
+    props: {},
   },
   // 4 数字输入框
   inputNumber: {
     component: 'el-input-number',
     defaultVal: 0,
-    props: {}
+    props: {},
   },
   // 5 多行文本
   textarea: {
@@ -34,8 +34,8 @@ export default {
     defaultVal: '',
     props: {
       type: 'textarea',
-      rows: 3
-    }
+      rows: 3,
+    },
   },
   // 6 单个日期时间选择器
   datePicker: {
@@ -44,8 +44,8 @@ export default {
     props: {
       type: 'date',
       editable: false,
-      valueFormat: 'yyyy-MM-dd'
-    }
+      valueFormat: 'yyyy-MM-dd',
+    },
   },
   // 7 日期时间段 选择器
   dateRangePicker: {
@@ -58,16 +58,16 @@ export default {
       endPlaceholder: '请选择结束时间',
       unlinkPanels: true,
       // rangeSeparator: '至',
-      valueFormat: 'yyyy-MM-dd'
-    }
+      valueFormat: 'yyyy-MM-dd',
+    },
   },
   // 8 固定 时分秒 时间选择器
   timeSelect: {
     component: 'el-time-select',
     defaultVal: '',
     props: {
-      editable: false
-    }
+      editable: false,
+    },
   },
   // 9 任意时间点 时间选择器
   timePicker: {
@@ -75,8 +75,8 @@ export default {
     defaultVal: '',
     props: {
       editable: false,
-      valueFormat: 'HH:mm:ss'
-    }
+      valueFormat: 'HH:mm:ss',
+    },
   },
   // 11 任意时间点 时间段 选择器
   timeRangePicker: {
@@ -85,14 +85,14 @@ export default {
     props: {
       editable: false,
       isRange: true,
-      valueFormat: 'HH:mm:ss'
-    }
+      valueFormat: 'HH:mm:ss',
+    },
   },
 
   // 12 单选按钮组
   radioGroup: {
     component: () => import('./base-components/BaseRadioGroup'),
-    props: {}
+    props: {},
   },
 
   // 13 select 单选 和多选
@@ -101,8 +101,8 @@ export default {
     defaultVal: '',
     props: {
       filterable: true,
-      clearable: true
-    }
+      clearable: true,
+    },
   },
 
   // 14 multipleSelect 单选 和多选
@@ -112,23 +112,23 @@ export default {
     props: {
       multiple: true, // 多选必须
       filterable: true,
-      clearable: true
-    }
+      clearable: true,
+    },
   },
 
   slot: {
-    component: 'slot'
+    component: 'slot',
   },
   // 9 自定义 key 和 value 查询集合
   selectInput: {
-    component: 'ba-select-input'
+    component: 'ba-select-input',
   },
 
   // 暂时未封装
   upload: {
-    component: 'ba-upload'
+    component: 'ba-upload',
   },
   editor: {
-    component: 'ba-editor'
-  }
+    component: 'ba-editor',
+  },
 }
