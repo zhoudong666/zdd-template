@@ -30,8 +30,8 @@ export default {
   props: {
     // innerVisible: Boolean, // 需要在组件的 props 选项里声明 innerVisible 这个 prop
 
-    title: { type: String, default: 'title' },
     visible: { type: Boolean, default: false },
+    title: { type: String, default: 'title' },
     /** 是否需要底部按钮 */
     hasFooter: { type: Boolean, default: true },
     /** 是否只要一个确认按钮 */
@@ -87,6 +87,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+// 用于控制弹框的最小宽度
+::v-deep .el-dialog {
+  min-width: 800px;
+}
+
 ::v-deep .el-dialog__header {
   padding: 10px 15px;
   border-bottom: 1px solid #ebeef5;

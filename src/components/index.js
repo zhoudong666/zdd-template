@@ -1,3 +1,5 @@
+import '@/components/ZDialog/directives.js'
+
 import Vue from 'vue'
 import ZForm from '@/components/ZForm'
 import ZTable from '@/components/ZTable'
