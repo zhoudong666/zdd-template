@@ -1,8 +1,8 @@
 <template>
   <div>
-    <h2>Dashboard</h2>
+    <!-- <h2>欢迎登录本系统</h2> -->
 
-    <div v-for="i in 100" :key="i">{{ i }}</div>
+    <img src="~@/assets/car-bg-welcome.png" alt="" style="width: 100%; height: calc(100vh - 134px)" />
   </div>
 </template>
 
@@ -13,7 +13,7 @@ export default {
     return {}
   },
   created() {},
-  methods: {}
+  methods: {},
 }
 </script>
 
