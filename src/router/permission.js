@@ -1,6 +1,6 @@
-import router from './index'
+import router, { resetRouter } from './index'
 import store from '@/store'
-import { Message } from 'element-ui'
+// import { Message } from 'element-ui'
 import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
 import { getToken } from '@/utils/auth' // get token from cookie
@@ -8,7 +8,7 @@ import getPageTitle from '@/utils/get-page-title'
 
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
-const whiteList = ['/login'] // no redirect whitelist
+const whiteList = ['/login', '/regist', '/authority', '/waiting', '/forget'] // no redirect whitelist
 
 router.beforeEach(async (to, from, next) => {
   // start progress bar
@@ -33,12 +33,18 @@ router.beforeEach(async (to, from, next) => {
         try {
           // get user info
           await store.dispatch('user/getInfo')
+          // await store.dispatch('sysDict/httplistWhs') // 获取全局字典
 
-          next()
+          store.dispatch('permission/generateRoutes').then(() => {
+            resetRouter()
+            router.addRoutes(store.getters.permission_routes)
+            next({ ...to, replace: true })
+          })
+          // next()
         } catch (error) {
           // remove token and go to login page to re-login
           await store.dispatch('user/resetToken')
-          Message.error(error || 'Has Error')
+          // Message.error(error || 'Has Error')
           next(`/login?redirect=${to.path}`)
           NProgress.done()
         }
