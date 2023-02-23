@@ -17,11 +17,10 @@
 </template>
 
 <script>
-import vueQr from 'vue-qr'
+import VueQr from 'vue-qr'
 export default {
-  components: {
-    vueQr,
-  },
+  name: 'VueQrDemo',
+  components: { VueQr },
   data() {
     return {
       visible: false,

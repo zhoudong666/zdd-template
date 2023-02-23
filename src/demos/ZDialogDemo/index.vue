@@ -48,6 +48,7 @@ props 包含的属性有:
 <script>
 import ZDialog from '@/components/ZDialog/index'
 export default {
+  name: 'ZDialogDemo',
   components: { ZDialog },
   data() {
     return {

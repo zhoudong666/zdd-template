@@ -99,6 +99,7 @@ export default {
     // 用于表头label6到8个字fixed固定导致布局错乱,也可用doLayout
     inner_cols() {
       return this.columns.reduce((all, curr) => {
+        curr.__children = curr.__children?.map((i) => ({ minWidth: '117px', align: 'center', ...i }))
         all.push({ minWidth: '117px', align: 'center', ...curr })
         return all
       }, [])
@@ -147,7 +148,6 @@ export default {
     },
     /** * 查询表格 * @param { isReset } 是否重置到第一页  */
     async queryData(isReset, pageInfo) {
-      // if (!this.isPagination) {
       if (this.query && this.query.url) {
         this.loading = true
         this.pagination.pageIndex = isReset ? this.pagination.pageIndex : 1
@@ -175,50 +175,9 @@ export default {
           }
           this.$emit('fetchTableData', this.tableData)
         })
-
-        // let result = null
-        // try {
-        //   switch (this.query.method) {
-        //     case 'get':
-        //       result = await get(this.query.url, param)
-        //       break
-        //     case 'post':
-        //       result = await post(this.query.url, param)
-        //       break
-        //     default:
-        //       result = await get(this.query.url, param)
-        //       break
-        //   }
-        // } catch (e) {
-        //   console.warn(e)
-        // } finally {
-        //   this.loading = false
-        //   const data = result
-        //   if ((data && data.total) || (data && data.total === 0)) {
-        //     this.pagination.totalRow = data.total
-        //     this.tableData = data.records
-        //     this.$emit('fetchData', data)
-        //   } else {
-        //     this.$message({
-        //       type: 'warning',
-        //       message: data && data.message ? data.message : '列表数据查询失败!'
-        //     })
-        //     this.tableData = []
-        //     this.pagination.pageIndex = 1
-        //     this.pagination.totalRow = 0
-        //   }
-        // }
       } else {
         this.tableData = this.localData
       }
-      // } else {
-      //   this.tableData = this.localData
-      //   for (const key in pageInfo) {
-      //     if (Object.hasOwnProperty.call(pageInfo, key)) {
-      //       this.pagination[key] = pageInfo[key]
-      //     }
-      //   }
-      // }
     },
     typeIndex(index) {
       const tabIndex = index + (this.pagination.pageIndex - 1) * this.pagination.pageSize + 1
