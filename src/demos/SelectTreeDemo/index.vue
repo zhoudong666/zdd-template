@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <MyCard style="height: 600px">
     value:{{ value }} node {{ JSON.stringify(node) }}
     <hr />
     <el-select
@@ -32,7 +32,7 @@
         :filter-node-method="filterNode"
       />
     </el-select>
-  </div>
+  </MyCard>
 </template>
 
 <script>

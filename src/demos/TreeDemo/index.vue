@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container">
+  <MyCard>
     <el-input v-model="filterText" placeholder="Filter keyword" style="margin-bottom: 30px" />
 
     <el-tree
@@ -10,7 +10,7 @@
       class="filter-tree"
       default-expand-all
     />
-  </div>
+  </MyCard>
 </template>
 
 <script>

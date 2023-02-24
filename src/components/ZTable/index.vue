@@ -7,6 +7,7 @@
       v-on="$listeners"
       :border="false"
       :data="tableData"
+      resizable
       @selection-change="handleSelectionChange"
     >
       <!-- :height="inner_height" -->

@@ -1,8 +1,15 @@
 <template>
-  <div style="height: 300px">
+  <div style="height: 500px; background: #fff; padding: 10px">
     <h5>split-pane标签外层容器必须有宽高</h5>
     <el-divider>分割线</el-divider>
-    <split-pane v-on:resize="resize" :min-percent="20" :default-percent="30" :max-percent="40" split="vertical">
+    <split-pane
+      style="height: 300px; background: #fff; border: 1px solid red"
+      v-on:resize="resize"
+      :min-percent="20"
+      :default-percent="30"
+      :max-percent="40"
+      split="vertical"
+    >
       <template slot="paneL">
         <div class="a">
           <ul>
@@ -32,21 +39,21 @@ export default {
   },
 }
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 ul,
 li {
   padding: 0;
   margin: 0;
 }
-.a {
+::v-deep .a {
   height: 100%;
-  background-color: rgb(245, 224, 224);
+  background-color: rgb(245, 224, 224) !important;
 }
-.b {
+::v-deep .b {
   height: 100%;
   background-color: rgb(241, 243, 205);
 }
-.c {
+::v-deep .c {
   height: 100%;
   background-color: rgb(205, 241, 188);
 }

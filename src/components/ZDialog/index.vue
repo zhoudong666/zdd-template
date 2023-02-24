@@ -106,4 +106,9 @@ export default {
 ::v-deep .el-dialog__headerbtn {
   top: 13px;
 }
+
+// .dialog-fade-leave-active {
+//   transition-duration: 0s !important; /*定义 退出时的 动画 过渡时间*/
+//   animation: none !important;
+// }
 </style>
