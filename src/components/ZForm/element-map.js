@@ -37,7 +37,7 @@ export default {
       rows: 3,
     },
   },
-  // 6 单个日期时间选择器
+  // 6.1 单个日期时间选择器
   datePicker: {
     component: 'el-date-picker',
     defaultVal: '',
@@ -47,6 +47,7 @@ export default {
       valueFormat: 'yyyy-MM-dd',
     },
   },
+  // 6.2 年月选择
   monthPicker: {
     component: 'el-date-picker',
     defaultVal: '',
@@ -56,6 +57,7 @@ export default {
       valueFormat: 'yyyy-MM',
     },
   },
+  // 6.3 年选择
   yearPicker: {
     component: 'el-date-picker',
     defaultVal: '',
@@ -63,6 +65,15 @@ export default {
       type: 'year',
       editable: false,
       valueFormat: 'yyyy',
+    },
+  },
+  // 6.4 季度选择器
+  quarterPicker: {
+    component: () => import('./base-components/QuarterPicker'),
+    // defaultVal: [],
+    props: {
+      format: 'yyyy年Q季度',
+      valueFormat: 'yyyyMM',
     },
   },
   // 7 日期时间段 选择器
@@ -96,7 +107,7 @@ export default {
       valueFormat: 'HH:mm:ss',
     },
   },
-  // 11 任意时间点 时间段 选择器
+  // 10 任意 时分秒 时间段 选择器
   timeRangePicker: {
     component: 'el-time-picker',
     defaultVal: ['00:00:00', '23:59:59'],
@@ -107,13 +118,26 @@ export default {
     },
   },
 
+  // 11 Switch
+  switch: {
+    component: 'el-switch',
+    defaultVal: 0,
+    props: {
+      activeValue: 1,
+      inactiveValue: 0,
+      activeColor: '#13ce66',
+      inactiveColor: '#ff4949',
+      my_switch: 'my_switch', // 用于属性选择器,定义switch样式
+    },
+  },
+
   // 12 单选按钮组
   radioGroup: {
     component: () => import('./base-components/BaseRadioGroup'),
     props: {},
   },
 
-  // 13 select 单选 和多选
+  // 13 select 单选
   select: {
     component: () => import('./base-components/BaseSelect'),
     defaultVal: '',
@@ -123,7 +147,7 @@ export default {
     },
   },
 
-  // 14 multipleSelect 单选 和多选
+  // 14 multipleSelect  多选
   mulSelect: {
     component: () => import('./base-components/BaseMulSelect'),
     defaultVal: [],
@@ -133,37 +157,14 @@ export default {
       clearable: true,
     },
   },
-  // 15 Switch
-  switch: {
-    component: 'el-switch',
-    defaultVal: 0,
-    props: {
-      activeValue: 1,
-      inactiveValue: 0,
-      activeColor: '#13ce66',
-      inactiveColor: '#ff4949',
-      my_switch: 'my_switch',
-    },
-  },
-
-  // 16 季度选择器
-  quarterPicker: {
-    component: () => import('./base-components/QuarterPicker'),
-    // defaultVal: [],
-    props: {
-      format: 'yyyy年Q季度',
-      valueFormat: 'yyyyMM',
-    },
-  },
-
   slot: {
     component: 'slot',
   },
+
   // 9 自定义 key 和 value 查询集合
   selectInput: {
     component: 'ba-select-input',
   },
-
   // 暂时未封装
   upload: {
     component: 'ba-upload',

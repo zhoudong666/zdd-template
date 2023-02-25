@@ -50,7 +50,7 @@
 
 <script>
 import { getToken } from '@/utils/auth'
-import { fileServer, fileUploadUrlStr } from '@/api/upload'
+import { fileServer, fileUploadUrlStr } from '@/components/ZUpload/uploadAPI.js'
 
 export default {
   name: 'ZImgUpload',

@@ -43,6 +43,8 @@ export default {
 <style lang="scss" scoped>
 .icon-container {
   padding: 10px;
+  background: #fff;
+  overflow: auto;
 }
 .icon-item {
   float: left;
