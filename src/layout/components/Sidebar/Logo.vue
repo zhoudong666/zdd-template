@@ -14,20 +14,21 @@
 </template>
 
 <script>
+import { title } from '@/settings.js'
 export default {
   name: 'SidebarLogo',
   props: {
     collapse: {
       type: Boolean,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
-      title: 'ZDD Template System',
-      logo: require('@/assets/logo.png') // '~@/assets/logo.png'
+      title,
+      logo: require('@/assets/logo.png'), // '~@/assets/logo.png'
     }
-  }
+  },
 }
 </script>
 

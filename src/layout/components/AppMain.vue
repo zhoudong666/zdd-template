@@ -29,13 +29,10 @@ export default {
   width: 100%;
   position: relative;
   overflow: hidden;
-  background-color: #eee;
   .page-container {
     height: 100%;
+    background-color: #eee;
     padding: 20px;
-    & > .el-scrollbar {
-      background-color: #fff;
-    }
   }
 }
 .fixed-header + .app-main {
