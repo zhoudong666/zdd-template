@@ -235,6 +235,23 @@ export default {
   /* padding: 12px; */
   background: white;
 
+  ::v-deep .el-checkbox__input.is-disabled.is-checked .el-checkbox__inner::after {
+    border-color: #fff;
+  }
+  ::v-deep .el-input.is-disabled .el-input__inner,
+  ::v-deep .el-textarea.is-disabled .el-textarea__inner {
+    color: #606266; //在这里更改 input 和 textarea 禁用字体颜色
+  }
+  ::v-deep .is-disabled .is-checked .el-checkbox__inner {
+    //更改选中时选框的样式
+    background-color: #1890ff;
+    border-color: #1890ff;
+  }
+  //更改未选中时文字(label)的样式
+  ::v-deep .is-disabled .el-checkbox__label {
+    color: #606266;
+  }
+
   [my_switch='my_switch'] {
     ::v-deep .el-switch__core {
       width: 56px !important;

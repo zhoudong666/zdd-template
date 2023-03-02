@@ -70,7 +70,7 @@ import {
   rowPropsKeys,
   colPorpKeys,
   descriptionsPropkeys,
-  descriptionsItemPropkeys
+  descriptionsItemPropkeys,
 } from './utils/props'
 
 import slotRender from './lib/slot-render'
@@ -84,22 +84,22 @@ export default {
   inheritAttrs: false,
   components: {
     agelFormItem,
-    slotRender
+    slotRender,
   },
   props: {
     value: {
       required: true,
       type: Object,
-      default: () => ({})
+      default: () => ({}),
     },
     attach: {
       type: Object,
-      default: () => ({})
+      default: () => ({}),
     },
     'item-extend-keys': {
       type: Array,
-      default: () => []
-    }
+      default: () => [],
+    },
   },
   watch: {
     value: {
@@ -109,15 +109,15 @@ export default {
         const agelFormConfig = this.$agelFormConfig || {}
         extend(this.value, agelFormConfig.form || {})
         extend(this.value, agFormProps.call(this))
-      }
+      },
     },
     attach: {
       deep: true,
       immediate: true,
       handler: function () {
         extend(this.value, this.attach, true)
-      }
-    }
+      },
+    },
   },
   mounted() {
     if (this.value.responsive) {
@@ -130,7 +130,6 @@ export default {
   },
   computed: {
     layout() {
-      console.log('2 layout')
       if (this.value.inline) {
         return 'inline'
       } else if (this.value.descriptions) {
@@ -164,7 +163,7 @@ export default {
         agItem.$component = this.getComponentAttrs(item)
         return agItem
       }).filter((v) => v.display)
-    }
+    },
   },
   methods: {
     injectItemAttr(item, prop) {
@@ -205,8 +204,8 @@ export default {
           {
             required: true,
             message: formItem.label + '必填',
-            trigger: inputArr.includes(this.getName(item)) ? 'blur' : 'change'
-          }
+            trigger: inputArr.includes(this.getName(item)) ? 'blur' : 'change',
+          },
         ]
       }
       return formItem
@@ -257,7 +256,7 @@ export default {
       if (name === 'el-slider' || name === 'el-rate') {
         return 0
       }
-      if (name === 'el-cascader' || name === 'el-transfer' || name === 'agel-upload') {
+      if (name === 'el-cascader' || name === 'el-transferManage' || name === 'agel-upload') {
         return []
       }
       // if (name === "el-input-number") return undefined;
@@ -342,12 +341,12 @@ export default {
     },
     clearValidate(props) {
       this.$refs.form.clearValidate(props)
-    }
+    },
   },
   install(vue, opts = {}) {
     vue.prototype.$agelFormConfig = opts
     vue.component(opts.name || this.name, this)
-  }
+  },
 }
 </script>
 

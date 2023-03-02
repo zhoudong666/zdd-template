@@ -36,16 +36,16 @@ module.exports = {
       warnings: false,
       errors: true,
     },
-    // before: require('./mock/mock-server.js')
-    proxy: {
-      '/v2': {
-        target: 'http://120.26.2.159:18085',
-        changeOrigin: true,
-        pathRewrite: {
-          '^/v2': '',
-        },
-      },
-    },
+    before: require('./mock/mock-server.js'), // demo时候使用mock数据
+    // proxy: { // 开发时候用
+    //   '/v2': {
+    //     target: 'http://120.26.2.159:18085',
+    //     changeOrigin: true,
+    //     pathRewrite: {
+    //       '^/v2': '',
+    //     },
+    //   },
+    // },
   },
 
   configureWebpack: {

@@ -10,6 +10,16 @@
 .justify-around {
   justify-content: space-around;
 }
+.align-center {
+  align-items: center;
+  align-content: center;
+}
+.flex-1 {
+  flex: 1;
+}
+.flex-2 {
+  flex: 2;
+}
 .pointer {
   cursor: pointer;
 }
@@ -18,6 +28,19 @@
 }
 .fr {
   float: right;
+}
+.text-right {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
+}
+.text-gray {
+  color: #606266;
+}
+.text-red {
+  color: red !important;
 }
 
 .red-btn {

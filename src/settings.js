@@ -1,5 +1,5 @@
 module.exports = {
-  title: 'zdd-template',
+  title: '项目的title',
 
   /**
    * @type {boolean} true | false
@@ -19,5 +19,5 @@ module.exports = {
    */
   sidebarLogo: true,
 
-  footer: 'copyright © 2017 XXXX 科技股份有限公司出品'
+  footer: 'copyright © 2023 XXX科技出品',
 }
