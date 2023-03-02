@@ -17,8 +17,8 @@ export function parseTime(time, cFormat) {
   if (typeof time === 'object') {
     date = time
   } else {
-    if ((typeof time === 'string')) {
-      if ((/^[0-9]+$/.test(time))) {
+    if (typeof time === 'string') {
+      if (/^[0-9]+$/.test(time)) {
         // support "1548221490638"
         time = parseInt(time)
       } else {
@@ -28,7 +28,7 @@ export function parseTime(time, cFormat) {
       }
     }
 
-    if ((typeof time === 'number') && (time.toString().length === 10)) {
+    if (typeof time === 'number' && time.toString().length === 10) {
       time = time * 1000
     }
     date = new Date(time)
@@ -40,12 +40,14 @@ export function parseTime(time, cFormat) {
     h: date.getHours(),
     i: date.getMinutes(),
     s: date.getSeconds(),
-    a: date.getDay()
+    a: date.getDay(),
   }
   const time_str = format.replace(/{([ymdhisa])+}/g, (result, key) => {
     const value = formatObj[key]
     // Note: getDay() returns 0 on Sunday
-    if (key === 'a') { return ['日', '一', '二', '三', '四', '五', '六'][value] }
+    if (key === 'a') {
+      return ['日', '一', '二', '三', '四', '五', '六'][value]
+    }
     return value.toString().padStart(2, '0')
   })
   return time_str
@@ -95,7 +97,7 @@ export function param2Obj(url) {
   }
   const obj = {}
   const searchArr = search.split('&')
-  searchArr.forEach(v => {
+  searchArr.forEach((v) => {
     const index = v.indexOf('=')
     if (index !== -1) {
       const name = v.substring(0, index)
@@ -105,3 +107,29 @@ export function param2Obj(url) {
   })
   return obj
 }
+
+// 将 存在树结构的 一维数组 转为 树结构
+export function listToTree(srcList) {
+  srcList = JSON.parse(JSON.stringify(srcList)) // 复制源数据,防止更改源数据
+  const result = []
+  // reduce收集所有节点信息存放在对象中，可以用forEach改写，不过代码会多几行
+  const nodeInfo = srcList.reduce((data, node) => ((data[node.id] = node), data), {})
+  // forEach给所有元素找妈妈
+  srcList.forEach((node) => {
+    if (!node.parentId) return result.push(node)
+    const parent = nodeInfo[node.parentId]
+    parent.children = parent.children || []
+    parent.children.push(node)
+  })
+  return result
+}
+// const list = [
+//   { id: 1, parentId: '' },
+//   { id: 2, parentId: '' },
+//   { id: 3, parentId: 1 },
+//   { id: 4, parentId: 2 },
+//   { id: 5, parentId: 3 },
+//   { id: 6, parentId: 3 },
+//   { id: 7, parentId: 6 },
+// ]
+// console.log('将 存在树结构的 一维数组 转为 树结构', listToTree(list))

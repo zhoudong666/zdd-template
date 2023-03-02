@@ -48,7 +48,7 @@ module.exports = [
       return {
         // code: 20000,
         // data: token,
-        ccess_token: '74c8499c-2d59-4cb5-8aa9-0ab679a82af7',
+        access_token: '74c8499c-2d59-4cb5-8aa9-0ab679a82af7',
         authorities: [],
         expires_in: 43199,
         refresh_token: '8d002439-7472-4bf7-b749-8ce25650cd55',

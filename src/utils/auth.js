@@ -1,6 +1,5 @@
 import Cookies from 'js-cookie'
-
-const TokenKey = 'print_token'
+import { TokenKey } from '@/settings'
 
 export function getToken() {
   return Cookies.get(TokenKey)

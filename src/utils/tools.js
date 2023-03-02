@@ -41,7 +41,6 @@ function padLeftZero(str) {
  */
 export function formatDate(date = +new Date(), fmt = 'yyyy-MM-dd') {
   date = new Date(date)
-  // debugger
   // 先处理年份
   // 正则y+ 匹配一个或多个y
   const yearReg = /(y+)/
@@ -57,7 +56,7 @@ export function formatDate(date = +new Date(), fmt = 'yyyy-MM-dd') {
     'd+': date.getDate(),
     'h+': date.getHours(),
     'm+': date.getMinutes(),
-    's+': date.getSeconds()
+    's+': date.getSeconds(),
   }
   for (const k in o) {
     const reg = new RegExp(`(${k})`)
@@ -87,14 +86,18 @@ export function diffDate(days = 0) {
  */
 export function DateFormat(date = +new Date(), fmt = 'yyyy-MM-dd') {
   date = new Date(date)
-  if (/H+/.test(fmt) && /h+/.test(fmt)) { throw Error('小时格式错误，同类型只能连续出现一次！') }
+  if (/H+/.test(fmt) && /h+/.test(fmt)) {
+    throw Error('小时格式错误，同类型只能连续出现一次！')
+  }
   /* 模板参数校验，正则验证方法 */
   const verify = function (Rex) {
     const arr = new RegExp(Rex).exec(fmt) // 获得匹配结果数组
     // 匹配失败返回
-    if (!arr) { return '' }
+    if (!arr) return ''
+
     // 同一类型间隔出现多次
-    if (fmt.split(Rex).length > 2) { throw Error('fmt格式错误：同类型只能连续出现一次！') }
+    if (fmt.split(Rex).length > 2) throw Error('fmt格式错误：同类型只能连续出现一次！')
+
     return arr[0]
   }
   /**
@@ -103,10 +106,13 @@ export function DateFormat(date = +new Date(), fmt = 'yyyy-MM-dd') {
    * @param {r对应正则对象} rex
    **/
   const common = function (r, rex, len) {
-    if (len !== 1 && len !== 2) { throw Error('月份格式错误:M只能出现1或2次') }
-    len === 2 ? fmt = fmt.replace(rex, o[r].length === 1 ? '0' + o[r] : o[r]) : fmt = fmt.replace(rex, o[r])
+    if (len !== 1 && len !== 2) {
+      throw Error('月份格式错误:M只能出现1或2次')
+    }
+    len === 2 ? (fmt = fmt.replace(rex, o[r].length === 1 ? '0' + o[r] : o[r])) : (fmt = fmt.replace(rex, o[r]))
   }
-  const o = { // 数据存储对象
+  const o = {
+    // 数据存储对象
     'y+': date.getFullYear() + '', // 年
     'q+': Math.floor((date.getMonth() + 3) / 3), // 季度
     'M+': date.getMonth() + 1 + '', // 月
@@ -115,28 +121,31 @@ export function DateFormat(date = +new Date(), fmt = 'yyyy-MM-dd') {
     'h+': date.getHours() + '', // 12时 ===>  改为都是24小时制
     'm+': date.getMinutes() + '', // 分
     's+': date.getSeconds() + '', // 秒
-    'S+': date.getMilliseconds() // 毫秒
+    'S+': date.getMilliseconds(), // 毫秒
   }
   for (const r in o) {
     const rex = new RegExp(r)
     const temp = verify(rex) // 匹配所得字符串
     const len = temp.length // 长度
-    if (!len || len === 0) { continue }
+    if (!len || len === 0) {
+      continue
+    }
     if (r === 'y+') {
-      if (len !== 2 && len !== 4) { throw Error('年份格式错误:y只能出现2或4次') }
-      len === 2 ? fmt = fmt.replace(rex, o[r].substring(2, 4)) : fmt = fmt.replace(rex, o[r])
+      if (len !== 2 && len !== 4) throw Error('年份格式错误:y只能出现2或4次')
+      len === 2 ? (fmt = fmt.replace(rex, o[r].substring(2, 4))) : (fmt = fmt.replace(rex, o[r]))
     } else if (r === 'q+') {
-      if (len !== 1) { throw Error('季度格式错误:q只能出现1次') }
+      if (len !== 1) throw Error('季度格式错误:q只能出现1次')
       fmt = fmt.replace(rex, o[r])
     } else if (r === 'h+') {
-      if (len !== 1 && len !== 2) { throw Error('小时格式错误:h只能出现1或2次') }
+      if (len !== 1 && len !== 2) throw Error('小时格式错误:h只能出现1或2次')
       // var h = (o[r] > 12 ? o[r] - 12 : o[r]) + '' 改为都是24小时制
       const h = o[r]
-      len === 2 ? fmt = fmt.replace(rex, h.length === 1 ? '0' + h : h) : fmt = fmt.replace(rex, h)
+      len === 2 ? (fmt = fmt.replace(rex, h.length === 1 ? '0' + h : h)) : (fmt = fmt.replace(rex, h))
     } else if (r === 'S+') {
-      if (len !== 1) { throw Error('毫秒数格式错误:S只能出现1次') }
+      if (len !== 1) throw Error('毫秒数格式错误:S只能出现1次')
       fmt = fmt.replace(rex, o[r])
-    } else { // (r==="M+" || r==="d+" || r==="H+" || r==="m+" || r==="s+")
+    } else {
+      // (r==="M+" || r==="d+" || r==="H+" || r==="m+" || r==="s+")
       common(r, rex, len)
     }
   }

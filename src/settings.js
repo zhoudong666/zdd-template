@@ -1,6 +1,7 @@
 module.exports = {
   title: '项目的title',
 
+  TokenKey: 'recycle_company_web', // 保存本地的token key
   /**
    * @type {boolean} true | false
    * @description Whether show the settings on right
