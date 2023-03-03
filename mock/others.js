@@ -4,7 +4,6 @@ module.exports = [
     url: '/corp/account/chooseMenuTree',
     type: 'get',
     response: (_) => {
-      console.log(111, _)
       return {
         code: 0,
         message: 'SUCCESS',
@@ -317,12 +316,7 @@ module.exports = [
     type: 'get',
     response: (config) => {
       const { pid } = config.query
-      console.log(1111, pid)
-
-      // return {
-      //   code: 20000,
-      //   data: 'success',
-      // }
+      // console.log(1111, pid)
       if (pid === '0') {
         return [
           {
@@ -332,8 +326,7 @@ module.exports = [
             level: 1,
           },
         ]
-      }
-      if (pid === '110000000000') {
+      } else if (pid === '110000000000') {
         return [
           {
             areaId: 110100000000,
@@ -342,8 +335,7 @@ module.exports = [
             level: 2,
           },
         ]
-      }
-      if (pid === '110100000000') {
+      } else if (pid === '110100000000') {
         return [
           {
             areaId: 110101000000,

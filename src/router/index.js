@@ -47,13 +47,154 @@ Router.prototype.replace = function push(location, onResolve, onReject) {
  * a base page that does not have permission requirements
  * all roles can be accessed
  */
-export const constantRoutes = [
+const isHideDemo = false
+const exampleRoutes = [
+  {
+    hidden: isHideDemo,
+    path: '/demo',
+    component: Layout,
+    redirect: '/demo/SvgIcon',
+    meta: { title: 'demo', icon: 'tree' },
+    children: [
+      {
+        path: 'index',
+        name: 'SvgIconDemo',
+        component: () => import('@/components/SvgIcon/demo.vue'),
+        meta: { title: 'SvgIcon', icon: 'form' },
+      },
+      {
+        path: 'ZFormDemo',
+        name: 'ZFormDemo',
+        component: () => import('@/demos/ZFormDemo/index'),
+        meta: { title: 'ZForm', icon: 'tree' },
+        children: [
+          {
+            path: 'ZformTypes',
+            name: 'ZformTypes',
+            component: () => import('@/demos/ZFormDemo/ZformTypes'),
+            meta: { title: 'ZformTypes', icon: 'tree' },
+          },
+          {
+            path: 'RequestData',
+            name: 'RequestData',
+            component: () => import('@/demos/ZTableDemo/RequestData'),
+            meta: { title: 'RequestData', icon: 'tree' },
+          },
+        ],
+      },
+      {
+        path: 'ZDialogDemo',
+        name: 'ZDialogDemo',
+        component: () => import('@/demos/ZDialogDemo/index'),
+        meta: { title: 'ZDialog', icon: 'tree' },
+      },
+      {
+        path: 'ZTableDemo',
+        name: 'ZTableDemo',
+        component: () => import('@/demos/ZTableDemo/index'),
+        meta: { title: 'ZTable', icon: 'table' },
+        children: [
+          {
+            path: 'LocalData',
+            name: 'LocalData',
+            component: () => import('@/demos/ZTableDemo/LocalData'),
+            meta: { title: 'LocalData', icon: 'tree' },
+          },
+          {
+            path: 'RequestData',
+            name: 'RequestData',
+            component: () => import('@/demos/ZTableDemo/RequestData'),
+            meta: { title: 'RequestData', icon: 'tree' },
+          },
+        ],
+      },
+      {
+        path: 'ZAreaDemo',
+        name: 'ZAreaDemo',
+        component: () => import('@/demos/ZAreaDemo/index'),
+        meta: { title: 'ZArea', icon: 'tree' },
+      },
+      {
+        path: 'VueQrDemo',
+        name: 'VueQrDemo',
+        component: () => import('@/demos/VueQrDemo/index'),
+        meta: { title: 'VueQr', icon: 'tree' },
+      },
+      {
+        path: 'SplitPaneDemo',
+        name: 'SplitPaneDemo',
+        component: () => import('@/demos/SplitPaneDemo/index'),
+        meta: { title: 'SplitPane', icon: 'tree' },
+      },
+      {
+        path: 'SelectTreeDemo',
+        name: 'SelectTreeDemo',
+        component: () => import('@/demos/SelectTreeDemo/index'),
+        meta: { title: 'SelectTree', icon: 'tree' },
+      },
+      {
+        path: 'TreeDemo',
+        name: 'TreeDemo',
+        component: () => import('@/demos/TreeDemo/index'),
+        meta: { title: 'Tree', icon: 'tree' },
+      },
+      {
+        path: '/css',
+        name: 'CSS',
+        component: () => import('@/demos/css-demo/index'),
+        meta: { title: 'CSS', icon: 'el-icon-s-help' },
+        children: [
+          {
+            path: 'demo1',
+            name: 'demo1',
+            component: () => import('@/demos/css-demo/demo1-colorful-border'),
+            meta: { title: 'demo1', icon: 'form' },
+          },
+          {
+            path: 'demo2',
+            name: 'demo2',
+            component: () => import('@/demos/css-demo/demo2'),
+            meta: { title: 'demo2', icon: 'form' },
+          },
+        ],
+      },
+    ],
+  },
+]
+
+const projConstRoutes = [
   {
     path: '/login',
     component: () => import('@/views/login/index'),
-    hidden: true
+    hidden: isHideDemo,
   },
   {
+    path: '/regist',
+    name: 'regist',
+    component: () => import('@/pages/otherPages/regist/index'),
+    hidden: isHideDemo,
+  },
+  {
+    path: '/waiting',
+    name: 'waiting',
+    component: () => import('@/pages/otherPages/waiting/index'),
+    hidden: isHideDemo,
+  },
+  {
+    path: '/forget',
+    name: 'forget',
+    component: () => import('@/pages/otherPages/forget/index'),
+    hidden: isHideDemo,
+  },
+  {
+    path: '/authority',
+    name: 'authority',
+    component: () => import('@/pages/otherPages/authority/index'),
+    hidden: isHideDemo,
+  },
+
+  {
+    // hidden: isHideDemo,
     path: '/',
     component: Layout,
     redirect: '/dashboard',
@@ -62,201 +203,55 @@ export const constantRoutes = [
         path: 'dashboard',
         name: 'Dashboard',
         component: () => import('@/views/dashboard/index'),
-        meta: { title: 'Dashboard', icon: 'dashboard' }
-      }
-    ]
-  },
-  {
-    path: '/icon-demo',
-    component: Layout,
-    hidden: false,
-    redirect: '/icon-demo/index',
-    children: [
-      {
-        path: 'index',
-        name: 'Form',
-        component: () => import('@/components/SvgIcon/demo.vue'),
-        meta: { title: 'IconDemo', icon: 'form' }
-      }
-    ]
+        meta: { title: '欢迎页', icon: 'dashboard' },
+      },
+    ],
   },
 
   {
-    path: '/example',
-    component: Layout,
-    redirect: '/example/table',
-    name: 'Example',
-    meta: { title: 'Example', icon: 'el-icon-s-help' },
-    children: [
-      {
-        path: 'vueQr',
-        name: 'vueQr',
-        component: () => import('@/views/example/vueQr/index'),
-        meta: { title: 'vueQr', icon: 'tree' }
-      },
-      {
-        path: 'splitPaneDemo',
-        name: 'splitPaneDemo',
-        component: () => import('@/views/example/splitPaneDemo/index'),
-        meta: { title: 'splitPaneDemo', icon: 'tree' }
-      },
-      // {
-      //   path: 'agelForm',
-      //   name: 'agelForm',
-      //   component: () => import('@/views/example/agelForm/index'),
-      //   meta: { title: 'agelForm', icon: 'tree' }
-      // },
-      {
-        path: 'ZFormDemo',
-        name: 'ZFormDemo',
-        component: () => import('@/views/example/ZFormDemo/index'),
-        meta: { title: 'ZFormDemo', icon: 'tree' }
-      },
-      {
-        path: 'table',
-        name: 'Table',
-        component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
-      },
-      {
-        path: 'dialogDrag',
-        name: 'dialogDrag',
-        component: () => import('@/views/example/dialogDrag/index'),
-        meta: { title: 'dialogDrag', icon: 'table' }
-      },
-      {
-        path: 'my-table',
-        name: 'MyTable',
-        component: () => import('@/views/my-table/index'),
-        meta: { title: 'MyTable', icon: 'table' }
-      },
-      {
-        path: 'tree',
-        name: 'Tree',
-        component: () => import('@/views/tree/index'),
-        meta: { title: 'Tree', icon: 'tree' }
-      },
-      {
-        path: 'select-tree',
-        name: 'selectTree',
-        component: () => import('@/views/example/selectTree/index'),
-        meta: { title: 'selectTree', icon: 'tree' }
-      },
-      {
-        path: 'ZDialog',
-        name: 'ZDialog',
-        component: () => import('@/views/example/ZDialog/index'),
-        meta: { title: 'ZDialog', icon: 'tree' }
-      }
-    ]
-  },
-
-  {
-    path: '/form',
-    component: Layout,
-    children: [
-      {
-        path: 'myTable',
-        name: 'myTable',
-        component: () => import('@/views/form/index'),
-        meta: { title: 'myTable', icon: 'form' }
-      }
-    ]
-  },
-
-  {
-    path: '/css',
-    component: Layout,
-    redirect: '/css/demo1',
-    name: 'CSS',
-    meta: { title: 'CSS', icon: 'el-icon-s-help' },
-    children: [
-      {
-        path: 'demo1',
-        name: 'demo1',
-        component: () => import('@/views/css-demo/demo1-colorful-border'),
-        meta: { title: 'demo1', icon: 'form' }
-      },
-      {
-        path: 'demo2',
-        name: 'demo2',
-        component: () => import('@/views/css-demo/demo2'),
-        meta: { title: 'demo2', icon: 'form' }
-      }
-    ]
-  },
-
-  {
-    path: '/nested',
-    component: Layout,
-    redirect: '/nested/menu1',
-    name: 'Nested',
-    meta: {
-      title: 'Nested',
-      icon: 'nested'
-    },
-    children: [
-      {
-        path: 'menu1',
-        component: () => import('@/views/nested/menu1/index'), // Parent router-view
-        name: 'Menu1',
-        meta: { title: 'Menu1' },
-        children: [
-          {
-            path: 'menu1-1',
-            component: () => import('@/views/nested/menu1/menu1-1'),
-            name: 'Menu1-1',
-            meta: { title: 'Menu1-1' }
-          },
-          {
-            path: 'menu1-2',
-            component: () => import('@/views/nested/menu1/menu1-2'),
-            name: 'Menu1-2',
-            meta: { title: 'Menu1-2' },
-            children: [
-              {
-                path: 'menu1-2-1',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-1'),
-                name: 'Menu1-2-1',
-                meta: { title: 'Menu1-2-1' }
-              },
-              {
-                path: 'menu1-2-2',
-                component: () => import('@/views/nested/menu1/menu1-2/menu1-2-2'),
-                name: 'Menu1-2-2',
-                meta: { title: 'Menu1-2-2' }
-              }
-            ]
-          },
-          {
-            path: 'menu1-3',
-            component: () => import('@/views/nested/menu1/menu1-3'),
-            name: 'Menu1-3',
-            meta: { title: 'Menu1-3' }
-          }
-        ]
-      },
-      {
-        path: 'menu2',
-        component: () => import('@/views/nested/menu2/index'),
-        name: 'Menu2',
-        meta: { title: 'menu2' }
-      }
-    ]
-  },
-
-  {
+    hidden: isHideDemo,
     // path: 'external-link',
     path: '',
     component: Layout,
     children: [
       {
         path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
-        meta: { title: 'External Link', icon: 'link' }
-      }
-    ]
+        meta: { title: 'External Link', icon: 'link' },
+      },
+    ],
   },
+]
+export const constantRoutes = exampleRoutes.concat(projConstRoutes)
 
+export const asyncRoutes = [
+  {
+    path: '/setting',
+    component: Layout,
+    redirect: '/setting/personSetting',
+    name: '系统设置',
+    meta: { title: '系统设置', icon: 'el-icon-setting', menuCode: 'm30000' },
+    children: [
+      {
+        path: 'personSetting',
+        name: 'personSetting',
+        component: () => import('@/pages/setting/personSetting/index'),
+        meta: { title: '物流人员设置', icon: 'dashboard', menuCode: 'm32000' },
+      },
+      {
+        path: 'countManage',
+        name: 'countManage',
+        component: () => import('@/pages/setting/countManage/index'),
+        meta: { title: '系统账号管理', icon: 'dashboard', menuCode: 'm33000' },
+      },
+      {
+        // hidden: true,
+        path: 'myInfo',
+        name: 'myInfo',
+        component: () => import('@/pages/setting/myInfo/index'),
+        meta: { title: '个人信息修改', icon: 'dashboard' },
+      },
+    ],
+  },
   {
     path: '/404',
     component: Layout,
@@ -268,12 +263,12 @@ export const constantRoutes = [
         path: '404',
         name: '404',
         component: () => import('@/views/404'),
-        meta: { title: '404', icon: 'form' }
-      }
-    ]
+        meta: { title: '404', icon: 'form' },
+      },
+    ],
   },
   // 404 page must be placed at the end !!!
-  { path: '*', redirect: '/404', hidden: true }
+  { path: '*', redirect: '/404', hidden: true },
 ]
 
 // hash 模式 和 history 模式的区别
@@ -292,7 +287,7 @@ const createRouter = () =>
   new Router({
     // mode: 'history', // require service support
     scrollBehavior: () => ({ y: 0 }),
-    routes: constantRoutes
+    routes: constantRoutes,
   })
 
 const router = createRouter()
