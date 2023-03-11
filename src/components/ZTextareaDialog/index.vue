@@ -13,15 +13,16 @@
   </ZDialog>
 </template>
 
+<!-- 使用 -->
 <!-- <ZTextareaDialog
-        :visible.sync="isZTextareaDialog"
         inputType="input"
         title="该出库单未填写联单号，是否现在填写"
         label="出库联单号"
         v-model="transNo"
+        :visible.sync="isZTextareaDialog"
         @sureBtn="textareaSure"
         @cancelBtn="textareaCancel"
-        />
+      />
 
       isZTextareaDialog: false,
       transNo: '',

@@ -61,62 +61,29 @@
 </template>
 
 <script>
-// import BaCheckbox from "../base-components/ba-checkbox";
-// import BaSelect from "../base-components/ba-select";
-// import BaRadio from "../base-components/ba-radio";
-// import BaSelectInput from "../base-components/ba-select-input";
 import { computeFormItem } from './core'
 import elMap from './element-map'
 export default {
   name: 'ZForm',
-  // components: { BaCheckbox, BaSelect, BaRadio, BaSelectInput },
   props: {
     /** 表单唯一引用 ref 对应的值 */
-    formRef: {
-      type: String,
-      // required: true,
-      default: 'form',
-    },
+    formRef: { type: String, default: 'formRef', },
     /** label 的宽度 */
-    labelWidth: {
-      type: String,
-      default: '110px',
-    },
+    labelWidth: { type: String, default: '110px', },
     /** 有折叠项情况下 是否展开 */
-    isOpen: {
-      type: Boolean,
-      default: false,
-    },
+    isOpen: { type: Boolean, default: false, },
     /** fields 表示每个表单项配置组成的对象 */
-    fields: {
-      type: Object,
-      default: () => ({}),
-    },
+    fields: { type: Object, default: () => ({}), },
     /** 隐藏可切换表单项 */
-    toggleFields: {
-      type: Object,
-      default: () => ({}),
-    },
+    toggleFields: { type: Object, default: () => ({}), },
     /** 是否显示操作按钮 */
-    hasControl: {
-      type: Boolean,
-      default: true,
-    },
+    hasControl: { type: Boolean, default: true, },
     /** 控制按钮所占份数 */
-    controlSpan: {
-      type: Number,
-      default: 6,
-    },
+    controlSpan: { type: Number, default: 6, },
     /** 提交按钮文本 */
-    submitText: {
-      type: String,
-      default: '提交',
-    },
+    submitText: { type: String, default: '提交', },
     /** 重置按钮文本 */
-    resetText: {
-      type: String,
-      default: '重置',
-    },
+    resetText: { type: String, default: '重置', },
   },
   data() {
     return {
@@ -163,35 +130,17 @@ export default {
           defaultValMap[key] = elMap[key].defaultVal
         }
       }
-      // const defaultValMap = elMap.map((item) => {})
-      // const defaultValMap = {
-      //   input: '',
-      //   checkbox: false,
-      //   checkboxGroup: [],
-      //   inputNumber: 0,
-      //   selectInput: []
-      //   // datetime: new Date(),
-      //   // undefined: ''
-      // }
-      // this.fields.concat(this.toggleFields).forEach((item) => {
-      //   if (item.defaultValue !== undefined) {
-      //     tempFormObj[item.key] = item.defaultValue
-      //   } else {
-      //     // TODO 每种表单类型元素不一样，所以默认值也有所不同
-      //     tempFormObj[item.key] = defaultValMap[item.type || 'input']
-      //   }
-      // })
+
       const tempObj = Object.assign({}, this.fields, this.toggleFields)
       for (const key in tempObj) {
         const item = tempObj[key]
         if (item.defaultValue !== undefined) {
           tempFormObj[key] = item.defaultValue
         } else {
-          // TODO 每种表单类型元素不一样，所以默认值也有所不同
+          //   每种表单类型元素不一样，所以默认值也有所不同
           tempFormObj[key] = defaultValMap[item.type || 'input']
         }
       }
-
       return tempFormObj
     },
     submit() {
@@ -217,9 +166,6 @@ export default {
       for (const key in valObj) {
         this.form[key] = valObj[key]
         this.clear()
-        // if (form.hasOwnProperty(key)) {
-        //   this.form[key] = form[key]
-        // }
       }
     },
     /** 控制显示与隐藏 */

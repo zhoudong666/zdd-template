@@ -19,8 +19,8 @@
           <ZSendBtn
             ref="ZSendBtnRef"
             :principal="mobile"
-            @sendHandle="sendHandle"
             :isSend="!!captchaCode"
+            @sendHandle="sendHandle"
             @isSendFn="isSendFn"
           />
         </template>

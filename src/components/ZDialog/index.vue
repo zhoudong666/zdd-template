@@ -18,6 +18,31 @@
   </el-dialog>
 </template>
 
+<!-- 使用 -->
+<!-- <ZDialog
+  title="ZDialog"
+  :visible.sync="visible1"
+  :before-close="() => (visible1 = false)"
+  @sureBtn="sureBtn1"
+  @cancelBtn="cancelBtn1"
+  >
+  ZDialog 内容
+  <el-button slot="footerBtn">底部自定义按钮</el-button>
+</ZDialog>
+
+visible1: false
+
+sureBtn1() {
+  this.$message.success('点击了确认按钮')
+  this.visible1 = false
+},
+cancelBtn1() {
+  this.$message('点击了取消按钮')
+  this.visible1 = false
+},
+
+-->
+
 <script>
 export default {
   name: 'ZDialog',
