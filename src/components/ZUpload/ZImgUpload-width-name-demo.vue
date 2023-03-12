@@ -18,6 +18,7 @@
       name="filePath"
       :data="uploadData"
       :class="{ hide: this.fileList.length >= this.limit }"
+      v-bind="$attrs"
     >
       <i class="el-icon-plus"></i>
       <!-- 上传提示 -->
