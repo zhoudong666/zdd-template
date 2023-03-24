@@ -99,11 +99,13 @@ export default {
   computed: {
     // 用于表头label6到8个字fixed固定导致布局错乱,也可用doLayout
     inner_cols() {
-      return this.columns.reduce((all, curr) => {
-        curr.__children = curr.__children?.map((i) => ({ minWidth: '117px', align: 'center', ...i }))
-        all.push({ minWidth: '117px', align: 'center', ...curr })
-        return all
-      }, [])
+      return this.columns
+        .filter((i) => (typeof i.isShow === 'function' ? i.isShow() : i))
+        .reduce((all, curr) => {
+          curr.__children = curr.__children?.map((i) => ({ minWidth: '117px', align: 'center', ...i }))
+          all.push({ minWidth: '117px', align: 'center', ...curr })
+          return all
+        }, [])
     },
     // // 处理表格高度 不传的话默认高度446px 传auto的话,自动高度
     // inner_height() {

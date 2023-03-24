@@ -289,8 +289,8 @@ $light_gray: #eee;
     background: #fff;
     .left-img {
       flex: 4;
-      background: $bg url(~@/assets/car-bg.png) no-repeat;
-      background-size: 100% 100%;
+      background: $bg url(~@/assets/car-bg.png) no-repeat center;
+      background-size: cover;
     }
     .right-form {
       flex: 3;

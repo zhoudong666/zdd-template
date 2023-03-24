@@ -1,6 +1,7 @@
 <template>
   <MyCard>
     <div slot="header">本地数据 无分页</div>
+    <el-button @click="btnClick" class="mb-10">控制列是否展示</el-button>
     <ZTable :columns="columns" :localData="localData" :isPagination="false">
       <template slot="height" slot-scope="{ data: { row } }">
         <el-input style="color: red" v-model="row.height"> </el-input>
@@ -17,12 +18,13 @@ export default {
   name: 'LocalData',
   data() {
     return {
+      isShow: false,
       // __slotName 用来指定作用域插槽
       // __children 用来指定多表头
       columns: [
         { label: '姓名', prop: 'name', align: 'left' },
         { label: '年龄', prop: 'age', align: 'center', width: 60 },
-        { label: '状态', prop: 'status', align: 'right' },
+        { label: '状态', prop: 'status', align: 'right', hide: true, isShow: () => this.isShow },
         { label: '日期', prop: 'date', minWidth: 140 },
         { label: '身高', __slotName: 'height' },
         {
@@ -44,6 +46,10 @@ export default {
     }
   },
   created() {},
-  methods: {},
+  methods: {
+    btnClick() {
+      this.isShow = !this.isShow
+    },
+  },
 }
 </script>
