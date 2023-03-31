@@ -2,7 +2,7 @@
   <div>
     <div class="logo-box">
       <img src="~@/assets/logo.png" alt="" />
-      电池回收平台
+      {{ title }}
     </div>
 
     <div class="form-box text-center">
@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import { title } from '@/settings'
 export default {
   name: 'waiting',
   created() {
@@ -26,6 +27,11 @@ export default {
       this.$store.dispatch('user/resetToken')
       this.$router.replace('/login')
     },
+  },
+  data() {
+    return {
+      title,
+    }
   },
 }
 </script>

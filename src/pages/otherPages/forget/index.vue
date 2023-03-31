@@ -2,7 +2,7 @@
   <div>
     <div class="logo-box">
       <img src="~@/assets/logo.png" alt="" />
-      电池回收平台
+      {{ project_title }}
     </div>
 
     <div class="form-box">
@@ -54,6 +54,7 @@ export default {
   },
   data() {
     return {
+      project_title,
       fields: {
         // loginUser: { span: 24, type: 'input', label: '登录账号', isRequired: true },
         password: { span: 24, type: 'input', label: '账号新密码', isRequired: true, props: { type: 'password' } },

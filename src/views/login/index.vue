@@ -13,7 +13,7 @@
         >
           <div class="logo-box">
             <img src="~@/assets/logo.png" alt="" />
-            电池回收平台
+            {{ project_title }}
           </div>
           <div class="title-container">
             <h3 class="title">系 统 登 录</h3>
@@ -97,14 +97,8 @@ import { title as project_title } from '@/settings'
 export default {
   name: 'Login',
   data() {
-    // const validatePassword = (rule, value, callback) => {
-    //   if (value.length < 6) {
-    //     callback(new Error('The password can not be less than 6 digits'))
-    //   } else {
-    //     callback()
-    //   }
-    // }
     return {
+      project_title,
       loginForm: {
         // principal: 'hzy',
         // credentials: '123456',
@@ -290,7 +284,10 @@ $light_gray: #eee;
     .left-img {
       flex: 4;
       background: $bg url(~@/assets/car-bg.png) no-repeat center;
+      // background-size: 100% 100%;
       background-size: cover;
+      background-position: center;
+      background-color: white;
     }
     .right-form {
       flex: 3;

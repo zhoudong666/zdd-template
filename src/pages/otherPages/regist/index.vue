@@ -2,7 +2,7 @@
   <div>
     <div class="logo-box">
       <img src="~@/assets/logo.png" alt="" />
-      电池回收平台
+      {{ title }}
     </div>
 
     <div class="form-box">
@@ -41,6 +41,7 @@
 </template>
 
 <script>
+import { title } from '@/settings'
 import ZSendBtn from '@/components/ZSendBtn'
 import { guid, blobToBase64 } from '@/utils/tools'
 import { login, httpgetRegCaptcha, httpgetRegPhoneVerify, httpregister } from '@/api/user'
@@ -53,6 +54,7 @@ export default {
   },
   data() {
     return {
+      title,
       fields: {
         corpName: { span: 24, type: 'input', label: '公司名称', isRequired: true },
         uscc: { span: 24, type: 'input', label: '公司统一代码', isRequired: true },

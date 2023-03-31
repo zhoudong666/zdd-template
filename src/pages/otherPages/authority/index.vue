@@ -2,7 +2,7 @@
   <div>
     <div class="logo-box">
       <img src="~@/assets/logo.png" alt="" />
-      电池回收平台
+      {{ title }}
     </div>
 
     <div class="form-box">
@@ -54,6 +54,7 @@
 import { fileServer } from '@/components/ZUpload/uploadAPI.js'
 import { httpcorpInfo } from '@/api/user'
 import { httptoAuthCorp } from '@/api/register'
+import { title } from '@/settings'
 export default {
   name: 'authority',
   created() {
@@ -67,6 +68,7 @@ export default {
   },
   data() {
     return {
+      title,
       areaObj: {
         province: '', // 所在省
         city: '', // 所在市
